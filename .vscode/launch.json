@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Rails Server",
+            "type": "rdbg",
+            "request": "launch",
+            "command": "bin/rails",
+            "script": "s",
+            "args": ["-b", "0.0.0.0"]
+        }
+    ]
+}

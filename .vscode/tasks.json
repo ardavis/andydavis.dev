@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Debug Rails Server",
+        "type": "shell",
+        "command": "${command:workbench.action.debug.start}",
+        "problemMatcher": [],
+        "dependsOn": []
+      },
+      {
+        "label": "Watch CSS",
+        "type": "shell",
+        "command": "yarn watch:css",
+        "problemMatcher": [],
+        "runOptions": {
+          "runOn": "folderOpen"
+        }
+      }
+    ]
+  }
