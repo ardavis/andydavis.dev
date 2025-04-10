@@ -11,6 +11,9 @@ gem "cssbundling-rails"                                 # Bundle and process CSS
 gem "bootsnap", require: false                          # Reduce boot times through caching
 gem "kamal", require: false                             # Deploy as a Docker container
 gem "thruster", require: false                          # HTTP asset caching/compression and X-Sendfile acceleration to Puma
+gem "devise", "~> 4.9"                                  # Authentication
+gem "haml-rails"                                        # View templates (preferred over ERB for conciseness)
+gem "html2haml"
 
 group :development, :test do
   gem "debug", require: "debug/prelude"                 # Debugger
