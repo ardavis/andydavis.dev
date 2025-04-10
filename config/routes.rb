@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  # mount ActionCable.server => "/cable"
-
   root "users#show"
 
   devise_for :users

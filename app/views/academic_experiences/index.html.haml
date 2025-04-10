@@ -1,0 +1,5 @@
+%h1 Academic Experiences 
+
+= link_to 'New Academic Experience', new_user_academic_experience_path(@user), class: 'btn btn-primary'
+- @academic_experiences.each do |academic_experience|
+  = academic_experience

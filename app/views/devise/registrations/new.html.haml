@@ -1,0 +1,40 @@
+#registration.card
+  .card-body
+    %h2.card-title Sign up
+
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = render "devise/shared/error_messages", resource: resource
+      
+      .input-group 
+        %span.input-group-text
+          %i.bi.bi-person-circle
+        .form-floating
+          = f.text_field :name, class: "form-control", placeholder: "Andy Davis"
+          = f.label :name
+
+      .input-group 
+        %span.input-group-text
+          %i.bi.bi-envelope-at-fill
+        .form-floating
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "andy@andydavis.dev"
+          = f.label :email
+      
+      .input-group 
+        %span.input-group-text
+          %i.bi.bi-key-fill
+        .form-floating
+          = f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "password123"
+          = f.label :password
+        
+      .input-group 
+        %span.input-group-text
+          %i.bi.bi-key-fill
+        .form-floating
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "password123"
+          = f.label :password_confirmation
+      
+      .actions
+        = f.submit "Sign up", class: 'btn btn-primary'
+
+      .card-footer
+        = render "devise/shared/links"

@@ -1,0 +1,29 @@
+#session.card
+  .card-body
+    %h2.card-title Log in
+
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .input-group 
+        %span.input-group-text
+          %i.bi.bi-envelope-at-fill
+        .form-floating
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "andy@andydavis.dev"
+          = f.label :email
+
+      .input-group 
+        %span.input-group-text
+          %i.bi.bi-key-fill
+        .form-floating
+          = f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "password123"
+          = f.label :password
+
+      - if devise_mapping.rememberable?
+        .form-check.form-switch
+          = f.check_box :remember_me, role: "switch", class: "form-check-input"
+          = f.label :remember_me, class: "form-check-label"
+
+      .actions
+        = f.submit "Log in", class: 'btn btn-primary'
+
+    .card-footer
+      = render "devise/shared/links"
