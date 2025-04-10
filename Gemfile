@@ -27,4 +27,5 @@ group :development do
   gem "web-console"                                     # Console on exceptions pages
   gem "guard"                                           # Autorun tests
   gem "guard-rspec"                                     # Autorun tests on save
+  gem "hotwire-spark"                                   # Live view reloading
 end

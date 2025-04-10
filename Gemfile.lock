@@ -145,6 +145,10 @@ GEM
       activesupport (>= 5.1)
       haml (>= 4.0.6)
       railties (>= 5.1)
+    hotwire-spark (0.1.13)
+      listen
+      rails (>= 7.0.0)
+      zeitwerk
     html2haml (2.3.0)
       erubis (~> 2.7.0)
       haml (>= 4.0)
@@ -415,6 +419,7 @@ DEPENDENCIES
   guard
   guard-rspec
   haml-rails
+  hotwire-spark
   html2haml
   importmap-rails
   kamal
