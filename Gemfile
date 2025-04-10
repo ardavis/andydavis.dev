@@ -8,28 +8,20 @@ gem "importmap-rails"                                   # JavaScript with ESM im
 gem "turbo-rails"                                       # Hotwire's page accelerator
 gem "stimulus-rails"                                    # Hotwire's JS framework
 gem "cssbundling-rails"                                 # Bundle and process CSS
-
-# TODO: Likely remove.
-# Use the database-backed adapters for Rails.cache and Active Job
-# gem "solid_cache"
-# gem "solid_queue"
-
 gem "bootsnap", require: false                          # Reduce boot times through caching
 gem "kamal", require: false                             # Deploy as a Docker container
 gem "thruster", require: false                          # HTTP asset caching/compression and X-Sendfile acceleration to Puma
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
-
-  # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem "brakeman", require: false
-
-  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem "rubocop-rails-omakase", require: false
+  gem "debug", require: "debug/prelude"                 # Debugger
+  gem "brakeman", require: false                        # Static analysis for security vulnerabilities
+  gem "rubocop-rails-omakase", require: false           # Omakase Ruby style
+  gem "rspec-rails"                                     # Tests
+  gem "factory_bot_rails"                               # Factories for Testing
 end
 
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
+  gem "web-console"                                     # Console on exceptions pages
+  gem "guard"                                           # Autorun tests
+  gem "guard-rspec"                                     # Autorun tests on save
 end
