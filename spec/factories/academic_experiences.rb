@@ -5,5 +5,6 @@ FactoryBot.define do
     start_date { 2.years.ago }
     end_date { 1.year.ago }
     description { "I went to school, read some stuff, and got a degree." }
+    user
   end
 end
