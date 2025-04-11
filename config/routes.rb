@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :academic_experiences
+    resources :cityscapes, only: :show
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

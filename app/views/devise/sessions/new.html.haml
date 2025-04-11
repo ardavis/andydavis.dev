@@ -3,14 +3,14 @@
     %h2.card-title Log in
 
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-      .input-group 
+      .input-group
         %span.input-group-text
           %i.bi.bi-envelope-at-fill
         .form-floating
           = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "andy@andydavis.dev"
           = f.label :email
 
-      .input-group 
+      .input-group
         %span.input-group-text
           %i.bi.bi-key-fill
         .form-floating

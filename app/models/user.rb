@@ -3,5 +3,4 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
 
   has_many :academic_experiences
-
 end

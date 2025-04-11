@@ -1,0 +1,39 @@
+%h1 New Academic Experience
+
+- if @academic_experience.errors.any?
+  .alert.alert-danger{ role: 'alert' }
+    %h4.alert-heading Errors
+    %p There was a problem saving this Academic Experience:
+    %hr
+    %ul
+      - @academic_experience.errors.full_messages.each do |error_message|
+        %ul= error_message
+
+
+= form_with model: [@user, @academic_experience] do |f|
+  .field.form-floating
+    = f.text_field :institution, class: "form-control", placeholder: "Kettering University"
+    = f.label :institution
+
+  .field.form-floating
+    = f.text_field :degree, class: "form-control", placeholder: "Bachelor's"
+    = f.label :degree
+
+  .field
+    = f.label :date_precision
+    = f.select :date_precision, %w[day month year]
+
+  .field.form-floating
+    = f.text_field :start_date, class: "form-control", placeholder: "2008/07/01"
+    = f.label :start_date
+
+  .field.form-floating
+    = f.text_field :end_date, class: "form-control", placeholder: "2012/09/01"
+    = f.label :end_date
+
+  .field
+    = f.label :description
+    = f.text_area :description, class: "form-control", placeholder: "", rows: 5
+
+  .actions
+    = f.submit nil, class: "btn btn-primary"

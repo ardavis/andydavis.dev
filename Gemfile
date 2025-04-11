@@ -28,4 +28,5 @@ group :development do
   gem "guard"                                           # Autorun tests
   gem "guard-rspec"                                     # Autorun tests on save
   gem "hotwire-spark"                                   # Live view reloading
+  gem "haml-lint", require: false                       # Haml Style
 end
