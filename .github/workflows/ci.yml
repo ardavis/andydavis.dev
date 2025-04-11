@@ -53,6 +53,9 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
+      - name: Lint views for consistent style
+        run: bin/haml-lint
+
   test:
     runs-on: ubuntu-latest
     services:
@@ -83,4 +86,3 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
 
         run: bin/rails db:setup spec
-      
