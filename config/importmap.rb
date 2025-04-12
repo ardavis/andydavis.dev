@@ -6,3 +6,7 @@ pin "@hotwired/stimulus", to: "stimulus.min.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "bootstrap", to: "bootstrap.bundle.min.js"
+pin "lil-gui" # @0.20.0
+pin "three", to: "https://unpkg.com/three@0.164.1/build/three.module.js"
+pin "three/addons/controls/OrbitControls", to: "https://unpkg.com/three@0.164.1/examples/jsm/controls/OrbitControls.js"
+pin "test"

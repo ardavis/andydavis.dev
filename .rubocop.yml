@@ -4,3 +4,14 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 Layout/SpaceInsideArrayLiteralBrackets:
   Enabled: false
+
+# TODO: Figure this out. Ideally I want these two but they seem to prevent me from this:
+# user = if Rails.env.development?
+#          'this'
+#        else
+#          'that'
+#        end
+Layout/EndAlignment:
+  Enabled: false
+Layout/ElseAlignment:
+  Enabled: false
