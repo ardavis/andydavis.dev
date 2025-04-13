@@ -43,6 +43,7 @@ export default class Camera {
     // Debug
     if (this.debug.active) {
       this.cameraSettings = {
+        orbitControls: false,
         fov: this.instance.fov,
         lookX: 0, lookY: 0, lookZ: 0
       }
@@ -50,6 +51,11 @@ export default class Camera {
       this.instance.updateLookAt = () => {
         this.instance.lookAt(this.cameraSettings.lookX, this.cameraSettings.lookY, this.cameraSettings.lookZ)
       }
+
+      this.debugFolder.add(this.cameraSettings, 'orbitControls').onChange((value) => {
+        this.setOrbitControls()
+        this.controls.update()
+      })
 
       this.debugFolder.add(this.instance, 'fov')
         .name("Field of View")
@@ -86,8 +92,8 @@ export default class Camera {
 
   setOrbitControls() {
     this.controls = new OrbitControls(this.instance, this.canvas)
-    this.controls.target.set(0, 1, 0)
     this.controls.enableDamping = true
+    this.controls.update()
   }
 
   resize() {

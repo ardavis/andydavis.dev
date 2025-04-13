@@ -13,7 +13,8 @@ class Api::DesksController < ApplicationController
 
     models = [
       { name: "standingDesk", path: "models/standing_desk.glb" },
-      { name: "ultrawideMonitor", path: "models/ultrawide_monitor.glb" }
+      { name: "ultrawideMonitor", path: "models/ultrawide_monitor.glb" },
+      { name: "mouseAndKeyboard", path: "models/mouse_and_keyboard.glb" }
     ]
 
     environments = [

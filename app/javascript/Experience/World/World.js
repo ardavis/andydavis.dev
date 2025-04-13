@@ -3,6 +3,7 @@ import Environment from 'World/Environment'
 import Wall from "World/Wall"
 import StandingDesk from 'World/StandingDesk'
 import Monitor from 'World/Monitor'
+import MouseAndKeyboard from 'World/MouseAndKeyboard'
 
 export default class World {
   constructor() {
@@ -15,6 +16,7 @@ export default class World {
       this.wall = new Wall()
       this.desk = new StandingDesk()
       this.monitor = new Monitor()
+      this.mouseAndKeyboard = new MouseAndKeyboard()
 
       this.environment = new Environment()
     })
