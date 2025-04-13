@@ -19,6 +19,7 @@ export default class Camera {
     this.sizes = this.experience.sizes
     this.scene = this.experience.scene
     this.canvas = this.experience.canvas
+    this.mouse = this.experience.mouse
 
     // Debug
     if (this.debug.active) {
@@ -93,7 +94,6 @@ export default class Camera {
   setOrbitControls() {
     this.controls = new OrbitControls(this.instance, this.canvas)
     this.controls.enableDamping = true
-    this.controls.update()
   }
 
   resize() {
@@ -102,7 +102,12 @@ export default class Camera {
   }
 
   update() {
-    if (this.controls)
+    if (this.controls) {
       this.controls.update()
+    }
+
+    this.instance.position.x = defaultPosX + this.mouse.x * this.mouse.sensitivity
+    this.instance.position.y = defaultPosY + this.mouse.y * this.mouse.sensitivity
+    this.instance.lookAt(defaultLookX, defaultLookY, defaultLookZ)
   }
 }

@@ -29,7 +29,17 @@
         "ms-vscode-remote.remote-containers",
         "github.vscode-github-actions",
         "KoichiSasada.vscode-rdbg",
-        "aki77.rails-partial"
+        "aki77.rails-partial",
+        "Gruntfuggly.todo-tree",
+        "karunamurti.haml",
+        "ms-azuretools.vscode-docker",
+        "dbaeumer.vscode-eslint",
+        "aki77.haml-lint",
+        "eamodio.gitlens",
+        "faktus.rails-factorybot-nav",
+        "Shopify.ruby-lsp",
+        "connorshea.vscode-ruby-test-adapter",
+        "hbenl.vscode-test-explorer"
       ]
     }
   },
