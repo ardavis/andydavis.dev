@@ -41,7 +41,6 @@ export default class StandingDesk {
 
     // Debug
     if (this.debug.active) {
-      console.log(this.deskTop.material)
       const debugDeskObj = { color: '#000' }
       this.debugFolder.add(this.deskTop.material, "roughness").min(0).max(1).step(0.0001)
       this.debugFolder.addColor(debugDeskObj, "color").onChange((value) => {

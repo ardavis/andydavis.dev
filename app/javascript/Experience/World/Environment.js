@@ -1,6 +1,10 @@
 import * as THREE from 'three'
 import Experience from 'Experience'
 
+const defaultSunPosX = 7.5,
+      defaultSunPosY = 2.8,
+      defaultSunPosZ = 9.4
+
 export default class Environment {
   constructor() {
     this.experience = new Experience()
@@ -25,7 +29,7 @@ export default class Environment {
     this.sunLight.shadow.camera.far = 15
     this.sunLight.shadow.mapSize.set(1024, 1024)
     this.sunLight.shadow.normalBias = 0.05
-    this.sunLight.position.set(5, 10, 7.5)
+    this.sunLight.position.set(defaultSunPosX, defaultSunPosY, defaultSunPosZ)
     this.scene.add(this.sunLight)
 
     // Debug

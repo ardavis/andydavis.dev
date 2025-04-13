@@ -31,12 +31,12 @@ export default class MouseAndKeyboard {
     this.model.scale.setScalar(0.075)
     this.model.position.set(defaultPosX, defaultPosY, defaultPosZ)
     this.model.castShadow = true
-    console.log(this.model)
     this.desk_group.add(this.model)
 
     this.model.traverse((child) => {
       if (child instanceof THREE.Mesh) {
         child.castShadow = true
+        child.receiveShadow = true
       }
     })
 

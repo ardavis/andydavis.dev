@@ -8,6 +8,12 @@ class Api::DesksController < ApplicationController
           normal: helpers.image_path("textures/painted_plaster_wall/painted_plaster_wall_nor_gl_1k.jpg"),
           arm: helpers.image_path("textures/painted_plaster_wall/painted_plaster_wall_arm_1k.jpg")
         }
+      },
+      {
+        name: "mouseAndKeyboard",
+        paths: {
+          ao: helpers.image_path("textures/mouse_and_keyboard/internal_ground_ao_texture.jpeg")
+        }
       }
     ]
 

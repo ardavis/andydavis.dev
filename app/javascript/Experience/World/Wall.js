@@ -1,7 +1,8 @@
 import * as THREE from 'three'
 import Experience from "Experience"
 
-const texturePackName = 'wallTexturePack'
+const texturePackName = 'wallTexturePack',
+      defaultPosZ = -0.5
 
 export default class Wall {
   constructor() {
@@ -22,23 +23,17 @@ export default class Wall {
     this.geometry = new THREE.PlaneGeometry(10, 10, 100, 100)
 
     // Textures
-    // const textures = {}
-    // textures.color = this.resources.items.wallColorTexture
-    // textures.normal = this.resources.items.wallNormalTexture
-    // textures.arm = this.resources.items.wallARMTexture
-
-    // textures.color.colorSpace = THREE.SRGBColorSpace
-    // textures.color.repeat.set(1.5, 1.5)
-    // textures.color.wrapS = THREE.RepeatWrapping
-    // textures.color.wrapT = THREE.RepeatWrapping
-    // textures.normal.repeat.set(1.5, 1.5)
-    // textures.normal.wrapS = THREE.RepeatWrapping
-    // textures.normal.wrapT = THREE.RepeatWrapping
-    // textures.arm.repeat.set(1.5, 1.5)
-    // textures.arm.wrapS = THREE.RepeatWrapping
-    // textures.arm.wrapT = THREE.RepeatWrapping
-
     const texturePack = this.resources.texturePacks[texturePackName]
+    texturePack.color.colorSpace = THREE.SRGBColorSpace
+    texturePack.color.repeat.set(1.5, 1.5)
+    texturePack.color.wrapS = THREE.RepeatWrapping
+    texturePack.color.wrapT = THREE.RepeatWrapping
+    texturePack.normal.repeat.set(1.5, 1.5)
+    texturePack.normal.wrapS = THREE.RepeatWrapping
+    texturePack.normal.wrapT = THREE.RepeatWrapping
+    texturePack.arm.repeat.set(1.5, 1.5)
+    texturePack.arm.wrapS = THREE.RepeatWrapping
+    texturePack.arm.wrapT = THREE.RepeatWrapping
 
     // Material
     this.material = new THREE.MeshStandardMaterial({
@@ -52,7 +47,7 @@ export default class Wall {
 
     // Mesh
     this.mesh = new THREE.Mesh(this.geometry, this.material)
-    this.mesh.position.z = -2
+    this.mesh.position.z = defaultPosZ
     this.mesh.receiveShadow = true
     this.scene.add(this.mesh)
 
@@ -63,7 +58,9 @@ export default class Wall {
         this.material.color = new THREE.Color(value)
       })
 
-      this.debugFolder.add(this.material, 'wireframe')
+      this.debugFolder.add(this.mesh.position, 'z')
+                      .name("Wall Position Z")
+                      .min(-10).max(10).step(0.1)
     }
   }
 }
