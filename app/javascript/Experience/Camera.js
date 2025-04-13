@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import { OrbitControls } from 'three/addons/controls/OrbitControls'
 import Experience from 'Experience'
 
 const defaultFOV = 25,
@@ -38,13 +37,11 @@ export default class Camera {
     )
     this.instance.position.set(defaultPosX, defaultPosY, defaultPosZ)
     this.instance.lookAt(defaultLookX, defaultLookY, defaultLookZ)
-    // this.setOrbitControls()
     this.scene.add(this.instance)
 
     // Debug
     if (this.debug.active) {
       this.cameraSettings = {
-        orbitControls: false,
         fov: this.instance.fov,
         lookX: 0, lookY: 0, lookZ: 0
       }
@@ -52,11 +49,6 @@ export default class Camera {
       this.instance.updateLookAt = () => {
         this.instance.lookAt(this.cameraSettings.lookX, this.cameraSettings.lookY, this.cameraSettings.lookZ)
       }
-
-      this.debugFolder.add(this.cameraSettings, 'orbitControls').onChange((value) => {
-        this.setOrbitControls()
-        this.controls.update()
-      })
 
       this.debugFolder.add(this.instance, 'fov')
         .name("Field of View")
@@ -91,21 +83,12 @@ export default class Camera {
     }
   }
 
-  setOrbitControls() {
-    this.controls = new OrbitControls(this.instance, this.canvas)
-    this.controls.enableDamping = true
-  }
-
   resize() {
     this.instance.aspect = this.sizes.width / this.sizes.height
     this.instance.updateProjectionMatrix()
   }
 
   update() {
-    if (this.controls) {
-      this.controls.update()
-    }
-
     this.instance.position.x = defaultPosX + this.mouse.x * this.mouse.sensitivity
     this.instance.position.y = defaultPosY + this.mouse.y * this.mouse.sensitivity
     this.instance.lookAt(defaultLookX, defaultLookY, defaultLookZ)
