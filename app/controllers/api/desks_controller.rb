@@ -3,7 +3,6 @@ class Api::DesksController < ApplicationController
     texturePacks = [
       {
         name: "wallTexturePack",
-        type: "texturePack",
         paths: {
           color: helpers.image_path("textures/painted_plaster_wall/painted_plaster_wall_diff_1k.jpg"),
           normal: helpers.image_path("textures/painted_plaster_wall/painted_plaster_wall_nor_gl_1k.jpg"),
@@ -13,17 +12,19 @@ class Api::DesksController < ApplicationController
     ]
 
     models = [
-      {
-        name: "standingDeskModel",
-        type: "gltfModel",
-        path: "models/standing_desk.glb"
-      }
+      { name: "standingDesk", path: "models/standing_desk.glb" },
+      { name: "ultrawideMonitor", path: "models/ultrawide_monitor.glb" }
+    ]
+
+    environments = [
+      { name: "SmallEmptyRoom1", path: "environments/small_empty_room_1_1k.hdr" }
     ]
 
     render json: {
-      object_count: texturePacks.sum { |pack| pack[:paths].size } + models.size,
+      object_count: texturePacks.sum { |pack| pack[:paths].size } + models.size + environments.size,
       texturePacks: texturePacks,
-      models: models
+      models: models,
+      environments: environments
     }
   end
 end

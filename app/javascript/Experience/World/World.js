@@ -2,7 +2,7 @@ import Experience from 'Experience'
 import Environment from 'World/Environment'
 import Wall from "World/Wall"
 import StandingDesk from 'World/StandingDesk'
-// import Floor from './Floor'
+import Monitor from 'World/Monitor'
 
 export default class World {
   constructor() {
@@ -13,7 +13,9 @@ export default class World {
     this.resources.on('ready', () => {
       // Setup
       this.wall = new Wall()
-      this.standingDesk = new StandingDesk()
+      this.desk = new StandingDesk()
+      this.monitor = new Monitor()
+
       this.environment = new Environment()
     })
   }

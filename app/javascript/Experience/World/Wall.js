@@ -63,7 +63,7 @@ export default class Wall {
         this.material.color = new THREE.Color(value)
       })
 
-      // this.debugFolder.add(this.mesh, 'wireframe')
+      this.debugFolder.add(this.material, 'wireframe')
     }
   }
 }

@@ -16,20 +16,37 @@ export default class StandingDesk {
     }
 
     // Setup
-    this.resource = this.resources.models.standingDeskModel
+    this.resource = this.resources.models.standingDesk
 
     this.setModel()
   }
 
   setModel() {
+    this.group = new THREE.Group()
+    this.scene.add(this.group)
+
     this.model = this.resource.scene
     this.model.castShadow = true
-    this.scene.add(this.model)
+
+    this.deskTop = this.model.getObjectByName("Object_2")
+    // this.deskTop.material.color = new THREE.
+
+    this.group.add(this.model)
 
     this.model.traverse((child) => {
       if (child instanceof THREE.Mesh) {
         child.castShadow = true
       }
     })
+
+    // Debug
+    if (this.debug.active) {
+      console.log(this.deskTop.material)
+      const debugDeskObj = { color: '#000' }
+      this.debugFolder.add(this.deskTop.material, "roughness").min(0).max(1).step(0.0001)
+      this.debugFolder.addColor(debugDeskObj, "color").onChange((value) => {
+        this.deskTop.material.color = value
+      })
+    }
   }
 }

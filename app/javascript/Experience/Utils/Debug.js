@@ -7,7 +7,14 @@ export default class Debug {
     this.active = window.location.hash === "#debug"
 
     if (this.active) {
-      this.ui = new GUI()
+      this.ui = new GUI({
+        closeFolders: true
+      })
     }
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key == 'h')
+        this.ui.show(this.ui._hidden)
+    })
   }
 }

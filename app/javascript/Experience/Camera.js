@@ -6,8 +6,8 @@ const defaultFOV = 25,
       defaultNear = 0.1,
       defaultFar = 100,
       defaultPosX = 0,
-      defaultPosY = 1.4,
-      defaultPosZ = 1.6,
+      defaultPosY = 1.6,
+      defaultPosZ = 1.8,
       defaultLookX = 0,
       defaultLookY = 1.2,
       defaultLookZ = 0
@@ -26,7 +26,6 @@ export default class Camera {
     }
 
     this.setInstance()
-    // this.setOrbitControls()
   }
 
   setInstance() {
@@ -38,6 +37,7 @@ export default class Camera {
     )
     this.instance.position.set(defaultPosX, defaultPosY, defaultPosZ)
     this.instance.lookAt(defaultLookX, defaultLookY, defaultLookZ)
+    // this.setOrbitControls()
     this.scene.add(this.instance)
 
     // Debug
@@ -86,6 +86,7 @@ export default class Camera {
 
   setOrbitControls() {
     this.controls = new OrbitControls(this.instance, this.canvas)
+    this.controls.target.set(0, 1, 0)
     this.controls.enableDamping = true
   }
 
