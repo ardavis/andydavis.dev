@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "desks/show"
   root "users#show"
 
   devise_for :users
@@ -7,10 +8,12 @@ Rails.application.routes.draw do
     resources :academic_experiences
   end
 
-  resource :cityscape, only: :show
+  # resource :cityscape, only: :show
+  resource :desk, only: :show
 
   namespace :api do
-    resource :cityscape
+    # resource :cityscape
+    resource :desk
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
