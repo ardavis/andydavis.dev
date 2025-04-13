@@ -1,24 +1,8 @@
-# README
+# Welcome to my Portfolio
+TODO
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Asset Licenses and Attributions
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- [Standing Desk](https://www.fab.com/listings/f2b1ed55-4225-4431-a47c-640900c8e432)
+- [Painted Plaster Wall](https://polyhaven.com/a/painted_plaster_wall)
+- [Ultrawide Monitor](https://www.fab.com/listings/c3412561-c3a7-487d-aaf9-af0c2f322093)
