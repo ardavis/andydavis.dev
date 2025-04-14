@@ -61,7 +61,6 @@ export default class Monitor {
 
   replaceScreen() {
     const screen = this.model.getObjectByName("Ultrawide_Monitor_Screen_0")
-    console.log(screen)
     screen.visible = false // TODO: Dispose!
     const box = new THREE.Box3().setFromObject(screen)
     const size = new THREE.Vector3()
@@ -89,7 +88,6 @@ export default class Monitor {
     this.newScreen.scale.setScalar(defaultScale)
 
     this.desk_group.add(this.newScreen)
-    console.log(this.newScreen)
 
     if (this.debug.active) {
       this.debugFolder.add(this.newScreen.position, 'x')
@@ -122,14 +120,9 @@ export default class Monitor {
     })
 
     this.textScreen = new THREE.Mesh(textGeometry, textMaterial)
-    this.textScreen.position.set(-(textWidth / 2), defaultPosY + (textHeight / 2) - 0.05, defaultPosZ + 0.001)
+    this.textScreen.position.set(-(textWidth / 2) + 0.025, defaultPosY + (textHeight / 2) - 0.05, defaultPosZ + 0.001)
 
     this.desk_group.add(this.textScreen)
-
-    // Debug
-    if (this.debug.active) {
-      // this.debugFolder.add(this.textScreen.)
-    }
   }
 
   update() {
@@ -137,7 +130,7 @@ export default class Monitor {
       this.textContext.clearRect(0, 0, this.textCanvas.width, this.textCanvas.height)
 
       const now = new Date()
-      const timeString = now.toLocaleTimeString()
+      const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 
       this.textContext.font = '20px Verdana'
       this.textContext.fillStyle = 'white'
