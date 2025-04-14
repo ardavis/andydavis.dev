@@ -1,9 +1,11 @@
 import * as THREE from 'three'
 import Experience from 'Experience'
+import { PMREMGenerator } from 'three';
 
 const defaultSunPosX = 7.5,
       defaultSunPosY = 2.8,
-      defaultSunPosZ = 9.4
+      defaultSunPosZ = 9.4,
+      defaultEnvIntensity = 0.5
 
 export default class Environment {
   constructor() {
@@ -22,7 +24,7 @@ export default class Environment {
   }
 
   setSunLight() {
-    this.sunLight = new THREE.DirectionalLight('#ffffff', 4)
+    this.sunLight = new THREE.DirectionalLight('#ffffff', 1)
     this.sunLight.castShadow = true
 
     // TODO: Fix shadow map size!
@@ -86,43 +88,15 @@ export default class Environment {
     const map = this.resources.environments.SmallEmptyRoom1
     map.mapping = THREE.EquirectangularReflectionMapping
 
-    // this.scene.background = map
-    this.scene.environment = map
+    const pmremGenerator = new PMREMGenerator(this.experience.renderer.instance)
+    const envMap = pmremGenerator.fromEquirectangular(map).texture
+
+    this.scene.environment = envMap
+    this.scene.environmentIntensity = defaultEnvIntensity
 
     // Debug
     this.debugFolder.add(this.scene, 'environmentIntensity')
                     .name("Environment Intensity")
                     .min(0).max(10).step(0.001)
-
-  //   this.environmentMap = {}
-  //   this.environmentMap.intensity = 0.4
-  //   this.environmentMap.texture = this.resources.environments.SmallEmptyRoom1
-  //   this.environmentMap.texture.colorSpace = THREE.SRGBColorSpace
-
-  //   this.scene.background = this.environmentMap.texture
-  //   this.scene.environment = this.environmentMap.texture
-
-  //   this.environmentMap.updateMaterials = () => {
-  //     this.scene.traverse((child) => {
-  //       if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
-  //         child.material.envMap = this.environmentMap.texture
-  //         child.material.envMapIntensity = this.environmentMap.intensity
-  //         child.material.needsUpdate = true
-  //       }
-  //     })
-  //   }
-
-  //   this.environmentMap.updateMaterials()
-
-  //   // Debug
-  //   if (this.debug.active) {
-  //     this.debugFolder
-  //       .add(this.environmentMap, 'intensity')
-  //       .name('envMapIntensity')
-  //       .min(0)
-  //       .max(4)
-  //       .step(0.001)
-  //       .onChange(this.environmentMap.updateMaterials)
-  //   }
   }
 }

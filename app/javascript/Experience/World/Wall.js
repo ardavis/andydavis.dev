@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import Experience from "Experience"
 
-const texturePackName = 'wallTexturePack',
+const texturePackName = 'wall',
       defaultPosZ = -0.5
 
 export default class Wall {

@@ -2,7 +2,7 @@ class Api::DesksController < ApplicationController
   def show
     texturePacks = [
       {
-        name: "wallTexturePack",
+        name: "wall",
         paths: {
           color: helpers.image_path("textures/painted_plaster_wall/painted_plaster_wall_diff_1k.jpg"),
           normal: helpers.image_path("textures/painted_plaster_wall/painted_plaster_wall_nor_gl_1k.jpg"),
@@ -14,7 +14,8 @@ class Api::DesksController < ApplicationController
     models = [
       { name: "standingDesk", path: "models/standing_desk.glb" },
       { name: "ultrawideMonitor", path: "models/ultrawide_monitor.glb" },
-      { name: "mouseAndKeyboard", path: "models/mouse_and_keyboard.glb" }
+      { name: "mouseAndKeyboard", path: "models/mouse_and_keyboard.glb" },
+      { name: "pictureFrame", path: "models/picture_frame.glb" }
     ]
 
     environments = [

@@ -8,4 +8,4 @@ TODO
 - [Ultrawide Monitor](https://www.fab.com/listings/c3412561-c3a7-487d-aaf9-af0c2f322093)
 - [Small Empty Room 1](https://polyhaven.com/a/small_empty_room_1)
 - [Mouse and Keyboard](https://www.fab.com/listings/e92a2cb9-6d64-43c9-ad5f-94398409a27c)
-- [Decorations Set](https://www.fab.com/listings/c60ef458-4a01-454e-9a3d-ae99c21fd399)
+- [Wooden Picture Frame](https://www.fab.com/listings/9474cfe9-4960-44a4-96b3-5ccfcf6b8ec5)

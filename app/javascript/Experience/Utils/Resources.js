@@ -1,6 +1,8 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader'
 import { RGBELoader } from 'three/addons/loaders/RGBELoader'
+import { OBJLoader } from 'three/addons/loaders/OBJLoader'
+import { MTLLoader } from 'three/addons/loaders/MTLLoader'
 
 import EventEmitter from "Utils/EventEmitter";
 
@@ -24,7 +26,6 @@ export default class Resources extends EventEmitter {
     this.loaders.gltfLoader = new GLTFLoader()
     this.loaders.textureLoader = new THREE.TextureLoader()
     this.loaders.rgbeLoader = new RGBELoader()
-    // this.loaders.cubeTextureLoader = new THREE.CubeTextureLoader()
   }
 
   async fetchSources() {
