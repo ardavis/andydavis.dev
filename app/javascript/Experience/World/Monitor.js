@@ -26,6 +26,7 @@ export default class Monitor {
 
     this.setModel()
     this.replaceScreen()
+    this.addTextToScreen()
   }
 
   setModel() {
@@ -59,7 +60,6 @@ export default class Monitor {
   }
 
   replaceScreen() {
-    // TODO: Swap the default display with my own.
     const screen = this.model.getObjectByName("Ultrawide_Monitor_Screen_0")
     console.log(screen)
     screen.visible = false // TODO: Dispose!
@@ -84,23 +84,66 @@ export default class Monitor {
       map: texturePack.color
     })
 
-    const newScreen = new THREE.Mesh(geometry, material)
-    newScreen.position.set(defaultPosX, defaultPosY, defaultPosZ)
-    newScreen.scale.setScalar(defaultScale)
+    this.newScreen = new THREE.Mesh(geometry, material)
+    this.newScreen.position.set(defaultPosX, defaultPosY, defaultPosZ)
+    this.newScreen.scale.setScalar(defaultScale)
 
-    this.desk_group.add(newScreen)
-    console.log(newScreen)
+    this.desk_group.add(this.newScreen)
+    console.log(this.newScreen)
 
     if (this.debug.active) {
-      this.debugFolder.add(newScreen.position, 'x')
+      this.debugFolder.add(this.newScreen.position, 'x')
                       .name("Screen Pos X")
                       .min(-10).max(10).step(0.001)
-      this.debugFolder.add(newScreen.position, 'y')
+      this.debugFolder.add(this.newScreen.position, 'y')
                       .name("Screen Pos Y")
                       .min(-10).max(10).step(0.001)
-      this.debugFolder.add(newScreen.position, 'z')
+      this.debugFolder.add(this.newScreen.position, 'z')
                       .name("Screen Pos Z")
                       .min(-10).max(10).step(0.001)
+    }
+  }
+
+  addTextToScreen() {
+    this.textCanvas = document.createElement('canvas')
+    const textBox = new THREE.Box3().setFromObject(this.newScreen)
+    const textSize = new THREE.Vector3()
+    textBox.getSize(textSize)
+    const textWidth = textSize.x
+    const textHeight = textSize.y
+    this.textContext = this.textCanvas.getContext('2d')
+
+    this.textTexture = new THREE.CanvasTexture(this.textCanvas)
+
+    const textGeometry = new THREE.PlaneGeometry(textWidth, textHeight)
+    const textMaterial = new THREE.MeshPhysicalMaterial({
+      map: this.textTexture,
+      transparent: true
+    })
+
+    this.textScreen = new THREE.Mesh(textGeometry, textMaterial)
+    this.textScreen.position.set(-(textWidth / 2), defaultPosY + (textHeight / 2) - 0.05, defaultPosZ + 0.001)
+
+    this.desk_group.add(this.textScreen)
+
+    // Debug
+    if (this.debug.active) {
+      // this.debugFolder.add(this.textScreen.)
+    }
+  }
+
+  update() {
+    if (this.textContext) {
+      this.textContext.clearRect(0, 0, this.textCanvas.width, this.textCanvas.height)
+
+      const now = new Date()
+      const timeString = now.toLocaleTimeString()
+
+      this.textContext.font = '20px Verdana'
+      this.textContext.fillStyle = 'white'
+      this.textContext.fillText(timeString, this.textCanvas.width / 2, this.textCanvas.height / 2)
+
+      this.textTexture.needsUpdate = true
     }
   }
 }

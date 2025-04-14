@@ -63,6 +63,7 @@ export default class Experience {
   update() {
     this.camera.update()
     this.renderer.update()
+    this.world.update()
   }
 
   // Consider adding a destroy method for each class to destroy itself.

@@ -23,22 +23,6 @@ export default class PictureFrame {
 
     this.setModel()
     this.addGlass()
-
-    // TODO: Temp. Remove.
-    // const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
-    // const sphereMaterial = new THREE.MeshPhysicalMaterial({
-    //     roughness: 0.0,
-    //     metalness: 1.0, // Fully metallic for strong reflections
-    //     envMapIntensity: 1.0,
-    //     transparent: true,
-    //     opacity: 0.5,
-    //     transmission: 1,
-    //     depthWrite: false,
-    //     depthTest: true
-    // });
-    // const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-    // sphere.position.set(defaultPosX, defaultPosY, defaultPosZ); // Offset so it doesn’t overlap the frame
-    // this.scene.add(sphere);
   }
 
   setModel() {

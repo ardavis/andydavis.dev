@@ -23,4 +23,9 @@ export default class World {
       this.pictureFrame = new PictureFrame()
     })
   }
+
+  update() {
+    if (this.monitor)
+      this.monitor.update()
+  }
 }

@@ -1,8 +1,7 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader'
 import { RGBELoader } from 'three/addons/loaders/RGBELoader'
-import { OBJLoader } from 'three/addons/loaders/OBJLoader'
-import { MTLLoader } from 'three/addons/loaders/MTLLoader'
+import { FontLoader } from 'three/addons/loaders/FontLoader'
 
 import EventEmitter from "Utils/EventEmitter";
 
@@ -14,6 +13,7 @@ export default class Resources extends EventEmitter {
     this.texturePacks = {}
     this.models = {}
     this.environments = {}
+    this.fonts = {}
     this.toLoad = null
     this.loaded = 0
 
@@ -26,6 +26,7 @@ export default class Resources extends EventEmitter {
     this.loaders.gltfLoader = new GLTFLoader()
     this.loaders.textureLoader = new THREE.TextureLoader()
     this.loaders.rgbeLoader = new RGBELoader()
+    this.loaders.fontLoader = new FontLoader()
   }
 
   async fetchSources() {
@@ -41,6 +42,9 @@ export default class Resources extends EventEmitter {
     this.loadTexturePacks(data.texturePacks)
     this.loadModels(data.models)
     this.loadEnvironments(data.environments)
+
+    if (data.fonts)
+      this.loadFonts(data.fonts)
   }
 
   loadTexturePacks(packs) {
@@ -79,6 +83,17 @@ export default class Resources extends EventEmitter {
     })
   }
 
+  loadFonts(fonts) {
+    fonts.forEach(font => {
+      this.loaders.fontLoader.load(
+        font.path,
+        (file) => {
+          this.fontLoaded(font, file)
+        }
+      )
+    })
+  }
+
   modelLoaded(model, file) {
     this.models[model.name] = file
     this.loaded++
@@ -96,6 +111,13 @@ export default class Resources extends EventEmitter {
 
   environmentLoaded(environment, file) {
     this.environments[environment.name] = file
+    this.loaded++
+
+    this.checkIfFinished()
+  }
+
+  fontLoaded(font, file) {
+    this.fonts[font.name] = file
     this.loaded++
 
     this.checkIfFinished()

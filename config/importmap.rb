@@ -11,4 +11,5 @@ pin "lil-gui" # @0.20.0
 pin "three", to: "https://unpkg.com/three@0.164.1/build/three.module.js"
 pin "three/addons/loaders/GLTFLoader", to: "https://unpkg.com/three@0.164.1/examples/jsm/loaders/GLTFLoader.js"
 pin "three/addons/loaders/RGBELoader", to: "https://unpkg.com/three@0.164.1/examples/jsm/loaders/RGBELoader.js"
+pin "three/addons/loaders/FontLoader", to: "https://unpkg.com/three@0.164.1/examples/jsm/loaders/FontLoader.js"
 pin_all_from "app/javascript/Experience", to: "Experience"
