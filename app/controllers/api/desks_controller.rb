@@ -8,6 +8,12 @@ class Api::DesksController < ApplicationController
           normal: helpers.image_path("textures/painted_plaster_wall/painted_plaster_wall_nor_gl_1k.jpg"),
           arm: helpers.image_path("textures/painted_plaster_wall/painted_plaster_wall_arm_1k.jpg")
         }
+      },
+      {
+        name: "wallpaper",
+        paths: {
+          color: helpers.image_path("textures/wallpaper/moon_from_iss_nasa.jpg")
+        }
       }
     ]
 

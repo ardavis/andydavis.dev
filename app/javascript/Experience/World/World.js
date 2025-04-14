@@ -14,13 +14,13 @@ export default class World {
 
     this.resources.on('ready', () => {
       // Setup
+      this.environment = new Environment()
+
       this.wall = new Wall()
       this.desk = new StandingDesk()
       this.monitor = new Monitor()
       this.mouseAndKeyboard = new MouseAndKeyboard()
       this.pictureFrame = new PictureFrame()
-
-      this.environment = new Environment()
     })
   }
 }
