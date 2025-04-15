@@ -24,7 +24,8 @@ class Api::DesksController < ApplicationController
       { name: "mouseAndKeyboard", path: "models/mouse_and_keyboard.glb" },
       { name: "pictureFrame", path: "models/picture_frame.glb" },
       { name: "curtain", path: "models/curtains-set.glb" },
-      { name: "window", path: "models/window.glb" }
+      { name: "window", path: "models/window.glb" },
+      { name: "rubberDuck", path: "models/rubber_duck_toy/rubber_duck_toy_1k.gltf" }
     ]
 
     environments = [

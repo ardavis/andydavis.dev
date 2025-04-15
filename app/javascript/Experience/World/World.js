@@ -7,6 +7,7 @@ import MouseAndKeyboard from 'World/MouseAndKeyboard'
 import PictureFrame from 'World/PictureFrame'
 import Curtain from 'World/Curtain'
 import Window from 'World/Window'
+import RubberDuck from 'World/RubberDuck'
 
 export default class World {
   constructor() {
@@ -24,6 +25,7 @@ export default class World {
       this.pictureFrame = new PictureFrame()
       this.curtain = new Curtain()
       this.window = new Window()
+      this.rubberDuck = new RubberDuck()
     })
   }
 
