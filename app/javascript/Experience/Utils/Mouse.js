@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import "gsap"
 import Experience from "Experience";
 
 // TODO: Move all constants across classes into a constants file
@@ -20,24 +19,18 @@ export default class Mouse {
       this.y = -(event.clientY / this.experience.sizes.height - 0.5) * 2
     })
 
-    window.addEventListener('scroll', () => {
-      const previousScrollY = this.scrollY
-      this.scrollY = window.scrollY
-
-      console.log("scrolling!")
-
-      // If the user scrolled up ("towards" the monitor)
-      if (this.scrollY > previousScrollY) {
-        console.log("here we go!")
-          gsap.to(
-              this.experience.camera.position,
-              {
-                  duration: 1.5,
-                  ease: "power2.inOut",
-                  y: "-=0.25",
-                  z: "-=1.5"
-              }
-          )
+    window.addEventListener('wheel', (event) => {
+      if (this.experience.camera.cameraSettings.orbit) {
+        return
+      }
+      else {
+        // If the user scrolled up ("towards" the monitor)
+        if (event.deltaY < 0) {
+          this.experience.camera.moveToMonitor()
+        }
+        else if (event.deltaY > 0) {
+          this.experience.camera.moveToStartingPosition()
+        }
       }
     })
   }

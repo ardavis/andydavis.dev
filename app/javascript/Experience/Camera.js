@@ -1,4 +1,6 @@
 import * as THREE from 'three'
+import gsap from "gsap"
+import { OrbitControls } from 'three/addons/controls/OrbitControls'
 import Experience from 'Experience'
 
 const defaultFOV = 25,
@@ -25,7 +27,15 @@ export default class Camera {
       this.debugFolder = this.debug.ui.addFolder('Camera')
     }
 
+    this.cameraSettings = {
+      orbit: false,
+      fov: defaultFOV,
+      lookX: 0, lookY: 0, lookZ: 0,
+      allowMovement: false, //true
+    }
+
     this.setInstance()
+    this.setOrbitControls()
   }
 
   setInstance() {
@@ -41,14 +51,31 @@ export default class Camera {
 
     // Debug
     if (this.debug.active) {
-      this.cameraSettings = {
-        fov: this.instance.fov,
-        lookX: 0, lookY: 0, lookZ: 0
-      }
-
       this.instance.updateLookAt = () => {
         this.instance.lookAt(this.cameraSettings.lookX, this.cameraSettings.lookY, this.cameraSettings.lookZ)
       }
+
+      this.debugFolder.add(this.cameraSettings, 'allowMovement')
+
+      this.debugFolder.add(this.cameraSettings, 'orbit').onChange(value => {
+        if (value) {
+          this.setOrbitControls()
+
+          const direction = new THREE.Vector3()
+          this.instance.getWorldDirection(direction)
+          const lookTarget = new THREE.Vector3()
+          lookTarget.copy(this.instance.position).add(direction.multiplyScalar(10))
+          this.controls.target.set(defaultLookX, defaultLookY, defaultLookZ)
+          this.controls.update()
+
+        }
+        else if (this.controls) {
+          this.controls.dispose()
+          this.controls = null
+          console.log("Camera Position:", this.instance.position)
+          console.log("Camera Rotation:", this.instance.rotation)
+        }
+      })
 
       this.debugFolder.add(this.instance, 'fov')
         .name("Field of View")
@@ -83,14 +110,39 @@ export default class Camera {
     }
   }
 
+  setOrbitControls() {
+    if (this.cameraSettings.orbit) {
+      this.controls = new OrbitControls(this.instance, this.canvas)
+      this.controls.enableDamping = true
+    }
+}
+
   resize() {
     this.instance.aspect = this.sizes.width / this.sizes.height
     this.instance.updateProjectionMatrix()
   }
 
   update() {
-    this.instance.position.x = defaultPosX + this.mouse.x * this.mouse.sensitivity
-    this.instance.position.y = defaultPosY + this.mouse.y * this.mouse.sensitivity
-    this.instance.lookAt(defaultLookX, defaultLookY, defaultLookZ)
+    if (this.cameraSettings.allowMovement && this.mouse) {
+      this.instance.position.x = defaultPosX + this.mouse.x * this.mouse.sensitivity
+      this.instance.position.y = defaultPosY + this.mouse.y * this.mouse.sensitivity
+      this.instance.lookAt(defaultLookX, defaultLookY, defaultLookZ)
+    }
+
+    if (this.controls) {
+      this.controls.update()
+    }
+  }
+
+  moveToStartingPosition() {
+    const time = gsap.timeline({ defaults: { duration: 1.5, ease: "power2.inOut" } })
+    time.to(this.instance.position, { x: defaultPosX, y: defaultPosY, z: defaultPosZ }, 0)
+         .to(this.instance.rotation, { x: -0.2186, y: 0, z: 0 }, 0)
+  }
+
+  moveToMonitor() {
+    const time = gsap.timeline({ defaults: { duration: 1.5, ease: "power2.inOut" } })
+    time.to(this.instance.position, { x: 0.004, y: 1.3216, z: 1 }, 0)
+         .to(this.instance.rotation, { x: -0.016, y: 0.004, z: 0 }, 0)
   }
 }

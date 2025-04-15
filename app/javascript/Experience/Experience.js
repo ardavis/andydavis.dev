@@ -4,9 +4,9 @@ import Time from "Utils/Time"
 import Mouse from "Utils/Mouse"
 import Camera from "Camera"
 import Renderer from 'Renderer'
-import World from 'World/World'
-import Resources from 'Utils/Resources'
 import Debug from 'Utils/Debug'
+import Resources from 'Utils/Resources'
+import World from 'World/World'
 
 let instance = null
 

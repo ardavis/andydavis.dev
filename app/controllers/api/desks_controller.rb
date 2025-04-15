@@ -1,5 +1,6 @@
 class Api::DesksController < ApplicationController
   def show
+    # TODO: These resources are quite hefty. Can we lighten the load some? Compression?
     texturePacks = [
       {
         name: "wall",

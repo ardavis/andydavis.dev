@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer'
 import Experience from "Experience";
 
 const defaultPosX = 0,
@@ -103,40 +104,65 @@ export default class Monitor {
   }
 
   addTextToScreen() {
-    this.textCanvas = document.createElement('canvas')
-    const textBox = new THREE.Box3().setFromObject(this.newScreen)
-    const textSize = new THREE.Vector3()
-    textBox.getSize(textSize)
-    const textWidth = textSize.x
-    const textHeight = textSize.y
-    this.textContext = this.textCanvas.getContext('2d')
+    const labelDiv = document.createElement('div');
+    labelDiv.className = 'label';
+    labelDiv.textContent = "Scroll up";
+    labelDiv.style.marginTop = '-1em';
+    labelDiv.style.color = 'white';
 
-    this.textTexture = new THREE.CanvasTexture(this.textCanvas)
+    const label = new CSS2DObject(labelDiv);
+    label.position.set(0, 1.2, 0.2); // relative to your monitor screen
 
-    const textGeometry = new THREE.PlaneGeometry(textWidth, textHeight)
-    const textMaterial = new THREE.MeshPhysicalMaterial({
-      map: this.textTexture,
-      transparent: true
-    })
+    this.newScreen.add(label); // attaches to 3D object
 
-    this.textScreen = new THREE.Mesh(textGeometry, textMaterial)
-    this.textScreen.position.set(-(textWidth / 2) + 0.025, defaultPosY + (textHeight / 2) - 0.05, defaultPosZ + 0.001)
-
-    this.desk_group.add(this.textScreen)
+    this.labelRenderer = new CSS2DRenderer();
+    this.labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    this.labelRenderer.domElement.style.pointerEvents = 'none';
+    this.labelRenderer.domElement.style.position = 'absolute';
+    this.labelRenderer.domElement.style.top = '0px';
+    if (!document.body.contains(this.labelRenderer.domElement)) {
+      document.body.appendChild(this.labelRenderer.domElement);
+    }
   }
 
+  // addTextToScreen() {
+  //   this.textCanvas = document.createElement('canvas')
+  //   const textBox = new THREE.Box3().setFromObject(this.newScreen)
+  //   const textSize = new THREE.Vector3()
+  //   textBox.getSize(textSize)
+  //   const textWidth = textSize.x
+  //   const textHeight = textSize.y
+  //   this.textContext = this.textCanvas.getContext('2d')
+
+  //   this.textTexture = new THREE.CanvasTexture(this.textCanvas)
+
+  //   const textGeometry = new THREE.PlaneGeometry(textWidth, textHeight)
+  //   const textMaterial = new THREE.MeshPhysicalMaterial({
+  //     map: this.textTexture,
+  //     transparent: true
+  //   })
+
+  //   this.textScreen = new THREE.Mesh(textGeometry, textMaterial)
+  //   this.textScreen.position.set(-(textWidth / 2) + 0.025, defaultPosY + (textHeight / 2) - 0.05, defaultPosZ + 0.001)
+
+  //   this.desk_group.add(this.textScreen)
+  // }
+
   update() {
-    if (this.textContext) {
-      this.textContext.clearRect(0, 0, this.textCanvas.width, this.textCanvas.height)
+    if (this.labelRenderer)
+      this.labelRenderer.render(this.scene, this.experience.camera.instance)
 
-      const now = new Date()
-      const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  //   if (this.textContext) {
+  //     this.textContext.clearRect(0, 0, this.textCanvas.width, this.textCanvas.height)
 
-      this.textContext.font = '20px Verdana'
-      this.textContext.fillStyle = 'white'
-      this.textContext.fillText(timeString, this.textCanvas.width / 2, this.textCanvas.height / 2)
+  //     const now = new Date()
+  //     const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 
-      this.textTexture.needsUpdate = true
-    }
+  //     this.textContext.font = '20px Verdana'
+  //     this.textContext.fillStyle = 'white'
+  //     this.textContext.fillText(timeString, this.textCanvas.width / 2, this.textCanvas.height / 2)
+
+  //     this.textTexture.needsUpdate = true
+  //   }
   }
 }

@@ -13,7 +13,6 @@ export default class World {
     this.resources = this.experience.resources
 
     this.resources.on('ready', () => {
-      // Setup
       this.environment = new Environment()
 
       this.wall = new Wall()

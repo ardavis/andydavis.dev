@@ -24,7 +24,6 @@ export default class Renderer {
       antialias: true
     })
 
-    // TODO: Try other tone mappings, maybe a tweak
     this.instance.toneMapping = THREE.CineonToneMapping
     this.instance.toneMappingExposure = 1.75
     this.instance.shadowMap.enabled = true

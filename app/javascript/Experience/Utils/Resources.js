@@ -2,7 +2,6 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader'
 import { RGBELoader } from 'three/addons/loaders/RGBELoader'
 import { FontLoader } from 'three/addons/loaders/FontLoader'
-
 import EventEmitter from "Utils/EventEmitter";
 
 export default class Resources extends EventEmitter {
@@ -98,7 +97,7 @@ export default class Resources extends EventEmitter {
     this.models[model.name] = file
     this.loaded++
 
-    this.checkIfFinished()
+    this.checkIfFinished(file)
   }
 
   texturePackLoaded(pack, mapType, file) {
@@ -106,24 +105,24 @@ export default class Resources extends EventEmitter {
     this.texturePacks[pack.name][mapType] = file
     this.loaded++
 
-    this.checkIfFinished()
+    this.checkIfFinished(file)
   }
 
   environmentLoaded(environment, file) {
     this.environments[environment.name] = file
     this.loaded++
 
-    this.checkIfFinished()
+    this.checkIfFinished(file)
   }
 
   fontLoaded(font, file) {
     this.fonts[font.name] = file
     this.loaded++
 
-    this.checkIfFinished()
+    this.checkIfFinished(file)
   }
 
-  checkIfFinished() {
+  checkIfFinished(file) {
     if (this.loaded === this.toLoad) {
       console.log(`Finished loading ${this.loaded} sources!`)
       this.trigger('ready')

@@ -24,20 +24,20 @@ export default class Wall {
 
     // Textures
     const texturePack = this.resources.texturePacks[texturePackName]
+    const repeatValue = 5
     texturePack.color.colorSpace = THREE.SRGBColorSpace
-    texturePack.color.repeat.set(1.5, 1.5)
+    texturePack.color.repeat.set(repeatValue, repeatValue)
     texturePack.color.wrapS = THREE.RepeatWrapping
     texturePack.color.wrapT = THREE.RepeatWrapping
-    texturePack.normal.repeat.set(1.5, 1.5)
+    texturePack.normal.repeat.set(repeatValue, repeatValue)
     texturePack.normal.wrapS = THREE.RepeatWrapping
     texturePack.normal.wrapT = THREE.RepeatWrapping
-    texturePack.arm.repeat.set(1.5, 1.5)
+    texturePack.arm.repeat.set(repeatValue, repeatValue)
     texturePack.arm.wrapS = THREE.RepeatWrapping
     texturePack.arm.wrapT = THREE.RepeatWrapping
 
     // Material
     this.material = new THREE.MeshStandardMaterial({
-      color: new THREE.Color("white"),
       map: texturePack.color,
       aoMap: texturePack.arm,
       roughnessMap: texturePack.arm,
