@@ -22,12 +22,16 @@ class Api::DesksController < ApplicationController
       { name: "standingDesk", path: "models/standing_desk.glb" },
       { name: "ultrawideMonitor", path: "models/ultrawide_monitor.glb" },
       { name: "mouseAndKeyboard", path: "models/mouse_and_keyboard.glb" },
-      { name: "pictureFrame", path: "models/picture_frame.glb" }
+      { name: "pictureFrame", path: "models/picture_frame.glb" },
+      { name: "curtain", path: "models/curtain.glb" },
+      { name: "window", path: "models/window.glb" }
     ]
 
     environments = [
       { name: "SmallEmptyRoom1", path: "environments/small_empty_room_1_1k.hdr" }
     ]
+
+    # TODO: Add https://polyhaven.com/a/rubber_duck_toy
 
     render json: {
       object_count: texturePacks.sum { |pack| pack[:paths].size } + models.size + environments.size,

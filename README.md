@@ -10,5 +10,5 @@ TODO
 - [Small Empty Room 1](https://polyhaven.com/a/small_empty_room_1)
 - [Mouse and Keyboard](https://www.fab.com/listings/e92a2cb9-6d64-43c9-ad5f-94398409a27c)
 - [Wooden Picture Frame](https://www.fab.com/listings/9474cfe9-4960-44a4-96b3-5ccfcf6b8ec5)
-
-- [Font: Roboto Condensed](https://fonts.google.com/specimen/Roboto+Condensed)
+- [Window](https://www.fab.com/listings/78769db1-cc1c-4edb-a1a7-e1b026758aa9)
+- [Curtain](https://sketchfab.com/3d-models/curtain-7187bae2a1944e2ab5b9c91b400558f1)
