@@ -123,6 +123,9 @@ export default class Camera {
   }
 
   update() {
+    // TODO: Fix mouse movement while zoomed into the monitor. Or maybe disallow it entirely?
+    //       Would be nice to store which "stage" we are at for viewing so we can check if
+    //       zoomed into the monitor or not.
     if (this.cameraSettings.allowMovement && this.mouse) {
       this.instance.position.x = defaultPosX + this.mouse.x * this.mouse.sensitivity
       this.instance.position.y = defaultPosY + this.mouse.y * this.mouse.sensitivity
@@ -135,14 +138,22 @@ export default class Camera {
   }
 
   moveToStartingPosition() {
-    const time = gsap.timeline({ defaults: { duration: 1.5, ease: "power2.inOut" } })
-    time.to(this.instance.position, { x: defaultPosX, y: defaultPosY, z: defaultPosZ }, 0)
+    this.experience.world.monitor.hideScreen()
+    const timeline = gsap.timeline({
+      defaults: { duration: 1.5, ease: "power2.inOut" },
+    })
+    timeline.to(this.instance.position, { x: defaultPosX, y: defaultPosY, z: defaultPosZ }, 0)
          .to(this.instance.rotation, { x: -0.2186, y: 0, z: 0 }, 0)
   }
 
   moveToMonitor() {
-    const time = gsap.timeline({ defaults: { duration: 1.5, ease: "power2.inOut" } })
-    time.to(this.instance.position, { x: 0.004, y: 1.3216, z: 1 }, 0)
-         .to(this.instance.rotation, { x: -0.016, y: 0.004, z: 0 }, 0)
+    const timeline = gsap.timeline({
+      defaults: { duration: 1.5, ease: "power2.inOut" },
+      onComplete: () => {
+        this.experience.world.monitor.showScreen()
+      }
+    })
+    timeline.to(this.instance.position, { x: 0.004, y: 1.3216, z: 1 }, 0)
+        .to(this.instance.rotation, { x: -0.016, y: 0.004, z: 0 }, 0)
   }
 }

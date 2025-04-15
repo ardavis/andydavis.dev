@@ -7,3 +7,11 @@
   padding: 0;
   display: block;
 }
+
+#screen_overlay {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  background-color: white;
+  display: none;
+}

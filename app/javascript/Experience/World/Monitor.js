@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer'
+import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer'
 import Experience from "Experience";
 
 const defaultPosX = 0,
@@ -104,25 +105,78 @@ export default class Monitor {
   }
 
   addTextToScreen() {
-    const labelDiv = document.createElement('div');
-    labelDiv.className = 'label';
-    labelDiv.textContent = "Scroll up";
-    labelDiv.style.marginTop = '-1em';
-    labelDiv.style.color = 'white';
+    const labelDiv = document.createElement('div')
+    labelDiv.className = 'label'
+    labelDiv.textContent = "Scroll up"
+    labelDiv.style.marginTop = '-1em'
+    labelDiv.style.color = 'white'
 
-    const label = new CSS2DObject(labelDiv);
-    label.position.set(0, 1.2, 0.2); // relative to your monitor screen
+    const label = new CSS2DObject(labelDiv)
+    label.position.set(0, 1.2, 0.2) // relative to your monitor screen
 
-    this.newScreen.add(label); // attaches to 3D object
+    this.newScreen.add(label) // attaches to 3D object
 
-    this.labelRenderer = new CSS2DRenderer();
-    this.labelRenderer.setSize(window.innerWidth, window.innerHeight);
-    this.labelRenderer.domElement.style.pointerEvents = 'none';
-    this.labelRenderer.domElement.style.position = 'absolute';
-    this.labelRenderer.domElement.style.top = '0px';
+    this.labelRenderer = new CSS2DRenderer()
+    this.labelRenderer.setSize(window.innerWidth, window.innerHeight)
+    this.labelRenderer.domElement.style.pointerEvents = 'none'
+    this.labelRenderer.domElement.style.position = 'absolute'
+    this.labelRenderer.domElement.style.top = '0px'
     if (!document.body.contains(this.labelRenderer.domElement)) {
-      document.body.appendChild(this.labelRenderer.domElement);
+      document.body.appendChild(this.labelRenderer.domElement)
     }
+  }
+
+  showScreen() {
+    this.newScreen.geometry.computeBoundingBox()
+    const boundingBox = this.newScreen.geometry.boundingBox
+    const corners = [
+      new THREE.Vector3(boundingBox.min.x, boundingBox.max.y, 0),
+      new THREE.Vector3(boundingBox.max.x, boundingBox.max.y, 0),
+      new THREE.Vector3(boundingBox.max.x, boundingBox.min.y, 0),
+      new THREE.Vector3(boundingBox.min.x, boundingBox.min.y, 0)
+    ]
+    corners.forEach(corner => this.newScreen.localToWorld(corner))
+
+    const toScreen = (vec3) => {
+      const vector = vec3.clone().project(this.experience.camera.instance)
+      return {
+        x: (vector.x * 0.5 + 0.5) * window.innerWidth,
+        y: (-vector.y * 0.5 + 0.5) * window.innerHeight
+      }
+    }
+    const [topLeft, topRight, bottomRight, bottomLeft] = corners.map(toScreen)
+    const minX = Math.min(topLeft.x, bottomLeft.x)
+    const maxX = Math.max(topRight.x, bottomRight.x)
+    const minY = Math.min(topLeft.y, topRight.y)
+    const maxY = Math.max(bottomLeft.y, bottomRight.y)
+    const width = maxX - minX
+    const height = maxY - minY
+
+    screen_overlay.style.left = `${minX}px`
+    screen_overlay.style.top = `${minY}px`
+    screen_overlay.style.width = `${width}px`
+    screen_overlay.style.height = `${height}px`
+    screen_overlay.style.display = "block"
+
+    // this.cssRenderer = new CSS3DRenderer()
+    // this.cssRenderer.setSize(window.innerWidth, window.innerHeight)
+    // if (!document.body.contains(this.cssRenderer.domElement)) {
+    //   document.body.appendChild(this.cssRenderer.domElement)
+    // }
+
+    // const element = document.createElement('iframe')
+    // element.src = 'http://localhost:3000/users/5/academic_experiences/new'
+    // element.style.width = '800px'
+    // element.style.height = '600px'
+
+    // const object = new CSS3DObject(element)
+    // object.position.copy(this.newScreen.position)
+    // object.position.z += 0.001
+    // this.desk_group.add(object)
+  }
+
+  hideScreen() {
+    screen_overlay.style.display = "none"
   }
 
   // addTextToScreen() {
@@ -149,6 +203,9 @@ export default class Monitor {
   // }
 
   update() {
+    // if (this.cssRenderer)
+    //   this.cssRenderer.render(this.scene, this.experience.camera.instance)
+
     if (this.labelRenderer)
       this.labelRenderer.render(this.scene, this.experience.camera.instance)
 

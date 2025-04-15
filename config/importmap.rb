@@ -14,5 +14,6 @@ pin "three/addons/loaders/GLTFLoader", to: "https://unpkg.com/three@0.164.1/exam
 pin "three/addons/loaders/RGBELoader", to: "https://unpkg.com/three@0.164.1/examples/jsm/loaders/RGBELoader.js"
 pin "three/addons/loaders/FontLoader", to: "https://unpkg.com/three@0.164.1/examples/jsm/loaders/FontLoader.js"
 pin "three/addons/renderers/CSS2DRenderer", to: "https://unpkg.com/three@0.164.1/examples/jsm/renderers/CSS2DRenderer.js"
+pin "three/addons/renderers/CSS3DRenderer", to: "https://unpkg.com/three@0.164.1/examples/jsm/renderers/CSS3DRenderer.js"
 pin "gsap", to: "https://esm.sh/gsap@3.12"
 pin_all_from "app/javascript/Experience", to: "Experience"
