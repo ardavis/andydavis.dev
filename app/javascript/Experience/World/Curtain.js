@@ -1,9 +1,10 @@
 import * as THREE from 'three'
 import Experience from "Experience";
 
-const defaultPosX = -1.9,
-      defaultPosY = 0.75,
-      defaultPosZ = 0.56
+const defaultPosX = 0.2,
+      defaultPosY = 0.5,
+      defaultPosZ = -0.4,
+      defaultScale = 0.4
 
 export default class Curtain {
 
@@ -29,7 +30,7 @@ export default class Curtain {
 
   setModel() {
     this.model = this.resource.scene
-    this.model.scale.setScalar(10)
+    this.model.scale.setScalar(defaultScale)
     this.model.position.set(defaultPosX, defaultPosY, defaultPosZ)
     this.model.rotation.y = -Math.PI * 0.5
     this.model.castShadow = true
@@ -39,20 +40,18 @@ export default class Curtain {
       if (child instanceof THREE.Mesh) {
         child.castShadow = true
         child.receiveShadow = true
-
-        // if (child.name == "fabric_03_08_Material001_0") {
-        //   console.log("found it!")
-        //   console.log(child.material)
-        //   child.material.color = new THREE.Color('navy')
-        // }
       }
     })
 
     // Debug
     if (this.debug.active) {
-      this.debugFolder.add(this.model.scale, 'x')
+      const debugObj = { scale: 1 }
+      this.debugFolder.add(debugObj, 'scale')
                       .name("Scale")
                       .min(0).max(1).step(0.001)
+                      .onChange((value) => {
+                        this.model.scale.setScalar(value)
+                      })
 
       this.debugFolder.add(this.model.position, 'x')
                       .name("Pos X")

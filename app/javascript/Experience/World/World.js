@@ -23,7 +23,7 @@ export default class World {
       this.mouseAndKeyboard = new MouseAndKeyboard()
       this.pictureFrame = new PictureFrame()
       this.curtain = new Curtain()
-      // this.window = new Window()
+      this.window = new Window()
     })
   }
 

@@ -23,7 +23,7 @@ class Api::DesksController < ApplicationController
       { name: "ultrawideMonitor", path: "models/ultrawide_monitor.glb" },
       { name: "mouseAndKeyboard", path: "models/mouse_and_keyboard.glb" },
       { name: "pictureFrame", path: "models/picture_frame.glb" },
-      { name: "curtain", path: "models/curtain.glb" },
+      { name: "curtain", path: "models/curtains-set.glb" },
       { name: "window", path: "models/window.glb" }
     ]
 
