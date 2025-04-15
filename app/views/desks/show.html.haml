@@ -1,7 +1,5 @@
 %canvas#desk_canvas
 
-#screen_overlay
-  %h1 Hello, Rails!
-  %p This is awesome! Whoo hoo!
+%iframe#screen_overlay(src="http://localhost:3000/users/5/academic_experiences/new" frameborder="0")
 
 = javascript_tag "import 'desk'", type: :module
