@@ -18,6 +18,7 @@ class Api::DesksController < ApplicationController
       }
     ]
 
+    # TODO: Move licenses to be with their respective models
     models = [
       { name: "standingDesk", path: "models/standing_desk.glb" },
       { name: "ultrawideMonitor", path: "models/ultrawide_monitor.glb" },
@@ -25,14 +26,13 @@ class Api::DesksController < ApplicationController
       { name: "pictureFrame", path: "models/picture_frame.glb" },
       { name: "curtain", path: "models/curtains-set.glb" },
       { name: "window", path: "models/window.glb" },
-      { name: "rubberDuck", path: "models/rubber_duck_toy/rubber_duck_toy_1k.gltf" }
+      { name: "rubberDuck", path: "models/rubber_duck_toy/rubber_duck_toy_1k.gltf" },
+      { name: "headphones", path: "models/headphones_with_stand.glb" }
     ]
 
     environments = [
       { name: "SmallEmptyRoom1", path: "environments/small_empty_room_1_1k.hdr" }
     ]
-
-    # TODO: Add https://polyhaven.com/a/rubber_duck_toy
 
     render json: {
       object_count: texturePacks.sum { |pack| pack[:paths].size } + models.size + environments.size,

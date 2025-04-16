@@ -3,7 +3,7 @@ import Experience from "Experience";
 
 const defaultPosX = -0.7,
       defaultPosY = 1.4,
-      defaultPosZ = -0.4
+      defaultPosZ = -0.5
 
 export default class PictureFrame {
 

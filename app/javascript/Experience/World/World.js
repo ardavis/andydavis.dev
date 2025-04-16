@@ -8,6 +8,7 @@ import PictureFrame from 'World/PictureFrame'
 import Curtain from 'World/Curtain'
 import Window from 'World/Window'
 import RubberDuck from 'World/RubberDuck'
+import Headphones from 'World/Headphones'
 
 export default class World {
   constructor() {
@@ -26,6 +27,7 @@ export default class World {
       this.curtain = new Curtain()
       this.window = new Window()
       this.rubberDuck = new RubberDuck()
+      this.headphones = new Headphones()
     })
   }
 

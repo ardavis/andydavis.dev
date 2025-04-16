@@ -13,3 +13,5 @@ TODO
 - [Window](https://www.fab.com/listings/78769db1-cc1c-4edb-a1a7-e1b026758aa9)
 - [Curtain](https://www.turbosquid.com/3d-models/3d-shapespark-low-poly-curtains-kit-1947311)
 - [Rubber Ducky](https://polyhaven.com/a/rubber_duck_toy)
+- [Headphone Stand](https://www.fab.com/listings/8a89729f-203f-466f-9839-a36270ea4caf)
+- [Headphones](https://www.turbosquid.com/3d-models/razer-kraken-2299675)

@@ -1,15 +1,15 @@
 import * as THREE from 'three'
 import Experience from "Experience";
 
-const defaultPosX = -0.3,
+const defaultPosX = -0.5,
       defaultPosY = 1.095,
-      defaultPosZ = -0.3,
+      defaultPosZ = -0.2,
       defaultRotX = 0,
-      defaultRotY = 0.8,
+      defaultRotY = 0.9,
       defaultRotZ = 0,
-      defaultScale = 0.2
+      defaultScale = 1
 
-export default class RubberDuck {
+export default class Headphones {
 
   constructor() {
     this.experience = new Experience()
@@ -21,11 +21,11 @@ export default class RubberDuck {
 
     // Debug
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder('Rubber Duck')
+      this.debugFolder = this.debug.ui.addFolder('Headphones')
     }
 
     // Setup
-    this.resource = this.resources.models.rubberDuck
+    this.resource = this.resources.models.headphones
 
     this.setModel()
   }

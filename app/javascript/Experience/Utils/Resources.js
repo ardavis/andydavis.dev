@@ -1,7 +1,9 @@
 import * as THREE from 'three'
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader'
 import { RGBELoader } from 'three/addons/loaders/RGBELoader'
 import { FontLoader } from 'three/addons/loaders/FontLoader'
+import { FBXLoader } from 'three/addons/loaders/FBXLoader'
 import EventEmitter from "Utils/EventEmitter";
 
 export default class Resources extends EventEmitter {
@@ -22,10 +24,16 @@ export default class Resources extends EventEmitter {
 
   setLoaders() {
     this.loaders = {}
+    this.loaders.dracoLoader = new DRACOLoader()
     this.loaders.gltfLoader = new GLTFLoader()
     this.loaders.textureLoader = new THREE.TextureLoader()
     this.loaders.rgbeLoader = new RGBELoader()
     this.loaders.fontLoader = new FontLoader()
+    this.loaders.fbxLoader = new FBXLoader()
+
+    const threeAddonsURL = document.querySelector("meta[name='three-addons-url']").content
+    this.loaders.dracoLoader.setDecoderPath(`${threeAddonsURL}/libs/draco/`)
+    this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader)
   }
 
   async fetchSources() {
@@ -62,7 +70,15 @@ export default class Resources extends EventEmitter {
   // gltf / glb
   loadModels(models) {
     models.forEach(model => {
-      this.loaders.gltfLoader.load(
+      let loader = null
+      if (model.path.includes(".fbx")) {
+        loader = this.loaders.fbxLoader
+      }
+      else {
+        loader = this.loaders.gltfLoader
+      }
+
+      loader.load(
         model.path,
         (file) => {
           this.modelLoaded(model, file)
