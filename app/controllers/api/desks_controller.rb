@@ -24,7 +24,7 @@ class Api::DesksController < ApplicationController
       { name: "ultrawideMonitor", path: "models/monitor.glb" },
       { name: "mouseAndKeyboard", path: "models/mouse_and_keyboard.glb" },
       { name: "pictureFrame", path: "models/wedding_photo.glb" },
-      { name: "curtain", path: "models/curtains_set.glb" },
+      { name: "curtain", path: "models/curtains.glb" },
       { name: "window", path: "models/window/scene.gltf" },
       { name: "rubberDuck", path: "models/rubber_duck_toy/rubber_duck_toy_1k.gltf" },
       { name: "headphones", path: "models/headphones_with_stand.glb" }
