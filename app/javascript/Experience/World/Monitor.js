@@ -9,7 +9,11 @@ const defaultPosX = 0,
       defaultScale = 0.075,
       defaultScreenX = 0,
       defaultScreenY = 1.38,
-      defaultScreenZ = -0.2
+      defaultScreenZ = -0.2,
+      defaultInstrPosX = -3.9,
+      defaultInstrPosY = 1.8,
+      defaultTimePosX = -4.258,
+      defaultTimePosY = 1.3
 
 export default class Monitor {
 
@@ -107,16 +111,24 @@ export default class Monitor {
   }
 
   addTextToScreen() {
-    const labelDiv = document.createElement('div')
-    labelDiv.className = 'label'
-    labelDiv.textContent = "Scroll up"
-    labelDiv.style.marginTop = '-1em'
-    labelDiv.style.color = 'white'
+    const now = new Date()
+    const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 
-    const label = new CSS2DObject(labelDiv)
-    label.position.set(0, 1.2, 0.2) // relative to your monitor screen
+    const instructionsDiv = document.createElement('div')
+    instructionsDiv.textContent = "Scroll up!"
+    instructionsDiv.className = 'instructions'
 
-    this.newScreen.add(label) // attaches to 3D object
+    const timeDiv = document.createElement('div')
+    timeDiv.textContent = timeString
+    timeDiv.className = 'current_time'
+
+    const time = new CSS2DObject(timeDiv)
+    time.position.set(defaultTimePosX, defaultTimePosY)
+    this.newScreen.add(time)
+
+    const instructions = new CSS2DObject(instructionsDiv)
+    instructions.position.set(defaultInstrPosX, defaultInstrPosY)
+    this.newScreen.add(instructions)
 
     this.labelRenderer = new CSS2DRenderer()
     this.labelRenderer.setSize(window.innerWidth, window.innerHeight)
@@ -126,8 +138,36 @@ export default class Monitor {
     if (!document.body.contains(this.labelRenderer.domElement)) {
       document.body.appendChild(this.labelRenderer.domElement)
     }
+
+    if (this.debug.active) {
+      this.debugFolder.add(instructions.position, 'x')
+                      .name("Instructions Pos X")
+                      .min(-10).max(10).step(0.001)
+
+      this.debugFolder.add(instructions.position, 'y')
+                      .name("Instructions Pos Y")
+                      .min(-10).max(10).step(0.001)
+
+      this.debugFolder.add(instructions.position, 'z')
+                      .name("Instructions Pos Z")
+                      .min(-10).max(10).step(0.001)
+
+      this.debugFolder.add(time.position, 'x')
+                      .name("Time Pos X")
+                      .min(-10).max(10).step(0.001)
+
+      this.debugFolder.add(time.position, 'y')
+                      .name("Time Pos Y")
+                      .min(-10).max(10).step(0.001)
+
+      this.debugFolder.add(time.position, 'z')
+                      .name("Time Pos Z")
+                      .min(-10).max(10).step(0.001)
+    }
   }
 
+  // When the user zooms into the monitor, we replace the "wallpaper" with a useable
+  // screen.
   showScreen() {
     this.newScreen.geometry.computeBoundingBox()
     const boundingBox = this.newScreen.geometry.boundingBox
@@ -159,55 +199,13 @@ export default class Monitor {
     screen_overlay.style.width = `${width}px`
     screen_overlay.style.height = `${height}px`
     screen_overlay.style.display = "block"
-
-    // this.cssRenderer = new CSS3DRenderer()
-    // this.cssRenderer.setSize(window.innerWidth, window.innerHeight)
-    // if (!document.body.contains(this.cssRenderer.domElement)) {
-    //   document.body.appendChild(this.cssRenderer.domElement)
-    // }
-
-    // const element = document.createElement('iframe')
-    // element.src = 'http://localhost:3000/users/5/academic_experiences/new'
-    // element.style.width = '800px'
-    // element.style.height = '600px'
-
-    // const object = new CSS3DObject(element)
-    // object.position.copy(this.newScreen.position)
-    // object.position.z += 0.001
-    // this.desk_group.add(object)
   }
 
   hideScreen() {
     screen_overlay.style.display = "none"
   }
 
-  // addTextToScreen() {
-  //   this.textCanvas = document.createElement('canvas')
-  //   const textBox = new THREE.Box3().setFromObject(this.newScreen)
-  //   const textSize = new THREE.Vector3()
-  //   textBox.getSize(textSize)
-  //   const textWidth = textSize.x
-  //   const textHeight = textSize.y
-  //   this.textContext = this.textCanvas.getContext('2d')
-
-  //   this.textTexture = new THREE.CanvasTexture(this.textCanvas)
-
-  //   const textGeometry = new THREE.PlaneGeometry(textWidth, textHeight)
-  //   const textMaterial = new THREE.MeshPhysicalMaterial({
-  //     map: this.textTexture,
-  //     transparent: true
-  //   })
-
-  //   this.textScreen = new THREE.Mesh(textGeometry, textMaterial)
-  //   this.textScreen.position.set(-(textWidth / 2) + 0.025, defaultPosY + (textHeight / 2) - 0.05, defaultPosZ + 0.001)
-
-  //   this.desk_group.add(this.textScreen)
-  // }
-
   update() {
-    // if (this.cssRenderer)
-    //   this.cssRenderer.render(this.scene, this.experience.camera.instance)
-
     if (this.labelRenderer)
       this.labelRenderer.render(this.scene, this.experience.camera.instance)
 

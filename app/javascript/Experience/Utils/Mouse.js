@@ -19,6 +19,9 @@ export default class Mouse {
       this.y = -(event.clientY / this.experience.sizes.height - 0.5) * 2
     })
 
+    // TODO: Check if it works with trackpads...
+    // TODO: NEW FEATURE - I would LOVE if after zooming into the monitor and choosing a project, such as NASA. Then
+    //       zooming out would have a different environment. Maybe stars, picture is me at NASA, etc.
     window.addEventListener('wheel', (event) => {
       if (this.experience.camera.cameraSettings.orbit) {
         return
