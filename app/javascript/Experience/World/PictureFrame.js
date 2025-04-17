@@ -3,7 +3,7 @@ import Experience from "Experience";
 
 const defaultPosX = -0.7,
       defaultPosY = 1.4,
-      defaultPosZ = -0.5
+      defaultPosZ = 0.18
 
 export default class PictureFrame {
 
@@ -22,7 +22,7 @@ export default class PictureFrame {
     this.resource = this.resources.models.pictureFrame
 
     this.setModel()
-    this.addGlass()
+    // this.addGlass()
   }
 
   setModel() {

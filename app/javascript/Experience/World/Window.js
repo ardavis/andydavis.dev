@@ -3,7 +3,8 @@ import Experience from "Experience";
 
 const defaultPosX = 0.9,
       defaultPosY = 1.5,
-      defaultPosZ = -0.5
+      defaultPosZ = -0.5,
+      defaultScale = 0.4
 
 export default class Window {
 
@@ -29,7 +30,8 @@ export default class Window {
 
   setModel() {
     this.model = this.resource.scene
-    this.model.scale.setScalar(0.4)
+    console.log(this.model)
+    this.model.scale.setScalar(defaultScale)
     this.model.position.set(defaultPosX, defaultPosY, defaultPosZ)
     this.model.castShadow = true
     this.desk_group.add(this.model)
@@ -43,9 +45,13 @@ export default class Window {
 
     // Debug
     if (this.debug.active) {
-      this.debugFolder.add(this.model.scale, 'x')
+      const debugObj = { scale: 1 }
+      this.debugFolder.add(debugObj, 'scale')
                       .name("Scale")
                       .min(0).max(1).step(0.001)
+                      .onChange((value) => {
+                        this.model.scale.setScalar(value)
+                      })
 
       this.debugFolder.add(this.model.position, 'x')
                       .name("Pos X")
@@ -57,6 +63,18 @@ export default class Window {
 
       this.debugFolder.add(this.model.position, 'z')
                       .name("Pos Z")
+                      .min(-10).max(10).step(0.001)
+
+      this.debugFolder.add(this.model.rotation, 'x')
+                      .name("Rot X")
+                      .min(-10).max(10).step(0.001)
+
+      this.debugFolder.add(this.model.rotation, 'y')
+                      .name("Rot Y")
+                      .min(-10).max(10).step(0.001)
+
+      this.debugFolder.add(this.model.rotation, 'z')
+                      .name("Rot Z")
                       .min(-10).max(10).step(0.001)
     }
   }

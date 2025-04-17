@@ -4,9 +4,12 @@ import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer
 import Experience from "Experience";
 
 const defaultPosX = 0,
-      defaultPosY = 1.38,
+      defaultPosY = 1.093,
       defaultPosZ = -0.20,
-      defaultScale = 0.075
+      defaultScale = 0.075,
+      defaultScreenX = 0,
+      defaultScreenY = 1.38,
+      defaultScreenZ = -0.2
 
 export default class Monitor {
 
@@ -35,7 +38,6 @@ export default class Monitor {
     this.model = this.resource.scene
     this.model.scale.setScalar(defaultScale)
     this.model.position.set(defaultPosX, defaultPosY, defaultPosZ)
-    this.model.rotation.z = Math.PI
     this.model.castShadow = true
     this.desk_group.add(this.model)
 
@@ -86,7 +88,7 @@ export default class Monitor {
     })
 
     this.newScreen = new THREE.Mesh(geometry, material)
-    this.newScreen.position.set(defaultPosX, defaultPosY, defaultPosZ)
+    this.newScreen.position.set(defaultScreenX, defaultScreenY, defaultScreenZ)
     this.newScreen.scale.setScalar(defaultScale)
 
     this.desk_group.add(this.newScreen)

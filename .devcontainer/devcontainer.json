@@ -39,7 +39,8 @@
         "faktus.rails-factorybot-nav",
         "Shopify.ruby-lsp",
         "connorshea.vscode-ruby-test-adapter",
-        "hbenl.vscode-test-explorer"
+        "hbenl.vscode-test-explorer",
+        "BriteSnow.vscode-toggle-quotes"
       ]
     }
   },

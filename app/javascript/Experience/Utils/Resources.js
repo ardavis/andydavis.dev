@@ -38,7 +38,6 @@ export default class Resources extends EventEmitter {
 
   async fetchSources() {
     // Fetch the desk data
-    // TODO: Rename since it's more than just a desk? Office?
     const response = await fetch("/api/desk")
     if (!response.ok) {
       throw new Error(`Error! Status: ${response.status}`)
@@ -80,8 +79,11 @@ export default class Resources extends EventEmitter {
 
       loader.load(
         model.path,
-        (file) => {
-          this.modelLoaded(model, file)
+        (file) => { this.modelLoaded(model, file) },
+        undefined,
+        (err) => {
+          console.log(`Error loading ${model.path}, retrying...`, err)
+          loader.load(model.path, (file) => this.modelLoaded(model, file))
         }
       )
     })
