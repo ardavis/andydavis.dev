@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer'
-import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer'
-import Experience from "Experience";
+import gsap from "gsap"
+import Experience from "Experience"
 
 const defaultPosX = 0,
       defaultPosY = 1.093,
@@ -122,45 +122,46 @@ export default class Monitor {
     timeDiv.textContent = timeString
     timeDiv.className = 'current_time'
 
-    const time = new CSS2DObject(timeDiv)
-    time.position.set(defaultTimePosX, defaultTimePosY)
-    this.newScreen.add(time)
+    this.time = new CSS2DObject(timeDiv)
+    this.time.position.set(defaultTimePosX, defaultTimePosY)
+    this.newScreen.add(this.time)
 
-    const instructions = new CSS2DObject(instructionsDiv)
-    instructions.position.set(defaultInstrPosX, defaultInstrPosY)
-    this.newScreen.add(instructions)
+    this.instructions = new CSS2DObject(instructionsDiv)
+    this.instructions.position.set(defaultInstrPosX, defaultInstrPosY)
+    this.newScreen.add(this.instructions)
 
-    this.labelRenderer = new CSS2DRenderer()
-    this.labelRenderer.setSize(window.innerWidth, window.innerHeight)
-    this.labelRenderer.domElement.style.pointerEvents = 'none'
-    this.labelRenderer.domElement.style.position = 'absolute'
-    this.labelRenderer.domElement.style.top = '0px'
-    if (!document.body.contains(this.labelRenderer.domElement)) {
-      document.body.appendChild(this.labelRenderer.domElement)
+    this.textRenderer = new CSS2DRenderer()
+    this.textRenderer.setSize(window.innerWidth, window.innerHeight)
+    this.textRenderer.domElement.style.pointerEvents = 'none'
+    this.textRenderer.domElement.style.position = 'absolute'
+    this.textRenderer.domElement.style.top = '0px'
+    if (!document.body.contains(this.textRenderer.domElement)) {
+      document.body.appendChild(this.textRenderer.domElement)
     }
+    this.fadeInTextRenderer(this.textRenderer)
 
     if (this.debug.active) {
-      this.debugFolder.add(instructions.position, 'x')
+      this.debugFolder.add(this.instructions.position, 'x')
                       .name("Instructions Pos X")
                       .min(-10).max(10).step(0.001)
 
-      this.debugFolder.add(instructions.position, 'y')
+      this.debugFolder.add(this.instructions.position, 'y')
                       .name("Instructions Pos Y")
                       .min(-10).max(10).step(0.001)
 
-      this.debugFolder.add(instructions.position, 'z')
+      this.debugFolder.add(this.instructions.position, 'z')
                       .name("Instructions Pos Z")
                       .min(-10).max(10).step(0.001)
 
-      this.debugFolder.add(time.position, 'x')
+      this.debugFolder.add(this.time.position, 'x')
                       .name("Time Pos X")
                       .min(-10).max(10).step(0.001)
 
-      this.debugFolder.add(time.position, 'y')
+      this.debugFolder.add(this.time.position, 'y')
                       .name("Time Pos Y")
                       .min(-10).max(10).step(0.001)
 
-      this.debugFolder.add(time.position, 'z')
+      this.debugFolder.add(this.time.position, 'z')
                       .name("Time Pos Z")
                       .min(-10).max(10).step(0.001)
     }
@@ -205,21 +206,46 @@ export default class Monitor {
     screen_overlay.style.display = "none"
   }
 
+  fadeInTextRenderer(renderer, duration = 0.5) {
+    const element = renderer.domElement
+    element.style.display = "block"
+    return gsap.fromTo(element,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration,
+        ease: "power1.in",
+      }
+    )
+  }
+
+  fadeOutTextRenderer(renderer, duration = 0.5) {
+    const element = renderer.domElement
+    return gsap.to(element, {
+      opacity: 0,
+      duration,
+      ease: "power1.out",
+      onComplete: () => {
+        element.style.display = "none"
+      }
+    })
+  }
+
   update() {
-    if (this.labelRenderer)
-      this.labelRenderer.render(this.scene, this.experience.camera.instance)
+    const currentStage = this.experience.currentStage
 
-  //   if (this.textContext) {
-  //     this.textContext.clearRect(0, 0, this.textCanvas.width, this.textCanvas.height)
+    // If the stage is START then we want to constantly re-render the text (update the current time).
+    // However, if the previous stage was monitor then we need to re-create the text as it was removed on zoom.
+    if ((currentStage == this.experience.stages.START) && this.textRenderer) {
+      if (this.previousStage && this.previousStage == this.experience.stages.MONITOR) {
+        this.addTextToScreen()
+      }
+      this.textRenderer.render(this.scene, this.experience.camera.instance)
+    }
+    else {
+      this.fadeOutTextRenderer(this.textRenderer)
+    }
 
-  //     const now = new Date()
-  //     const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-
-  //     this.textContext.font = '20px Verdana'
-  //     this.textContext.fillStyle = 'white'
-  //     this.textContext.fillText(timeString, this.textCanvas.width / 2, this.textCanvas.height / 2)
-
-  //     this.textTexture.needsUpdate = true
-  //   }
+    this.previousStage = this.experience.currentStage
   }
 }

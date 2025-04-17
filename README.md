@@ -15,3 +15,5 @@ TODO
 - [Rubber Ducky](https://polyhaven.com/a/rubber_duck_toy)
 - [Headphone Stand](https://www.fab.com/listings/8a89729f-203f-466f-9839-a36270ea4caf)
 - [Headphones](https://www.turbosquid.com/3d-models/razer-kraken-2299675)
+- [OutThere Sticky Note](https://sketchfab.com/3d-models/outthere-sticky-note-7cd5c7e5be624ca48e072326ed6a1da2)
+  - "OutThere Sticky Note" (https://skfb.ly/otuDL) by Gavin_McAllister is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).

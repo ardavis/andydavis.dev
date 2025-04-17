@@ -141,12 +141,16 @@ export default class Camera {
     this.experience.world.monitor.hideScreen()
     const timeline = gsap.timeline({
       defaults: { duration: 1.5, ease: "power2.inOut" },
+      onComplete: () => {
+        this.experience.currentStage = this.experience.stages.START
+      }
     })
     timeline.to(this.instance.position, { x: defaultPosX, y: defaultPosY, z: defaultPosZ }, 0)
          .to(this.instance.rotation, { x: -0.2186, y: 0, z: 0 }, 0)
   }
 
   moveToMonitor() {
+    this.experience.currentStage = this.experience.stages.MONITOR
     const timeline = gsap.timeline({
       defaults: { duration: 1.5, ease: "power2.inOut" },
       onComplete: () => {

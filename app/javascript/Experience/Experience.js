@@ -24,6 +24,11 @@ export default class Experience {
 
     // Options
     this.canvas = canvas
+    this.stages = Object.freeze({
+      START: 0,
+      MONITOR: 1
+    })
+    this.currentStage = this.stages.START
 
     // Setup
     this.debug = new Debug()
