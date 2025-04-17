@@ -9,7 +9,7 @@ TODO
   - [Wallpaper](https://hdqwalls.com/wallpaper/3440x1440/view-of-moon-from-the-iss-nasa)
 - [Small Empty Room 1](https://polyhaven.com/a/small_empty_room_1)
 - [Mouse and Keyboard](https://www.fab.com/listings/e92a2cb9-6d64-43c9-ad5f-94398409a27c)
-- [Wooden Picture Frame](https://www.fab.com/listings/9474cfe9-4960-44a4-96b3-5ccfcf6b8ec5)
+- [Picture Frame Collection](https://www.fab.com/listings/697a4f42-9402-4a1c-977f-776fab583032)
 - [Window](https://www.fab.com/listings/78769db1-cc1c-4edb-a1a7-e1b026758aa9)
 - [Curtain](https://www.turbosquid.com/3d-models/3d-shapespark-low-poly-curtains-kit-1947311)
 - [Rubber Ducky](https://polyhaven.com/a/rubber_duck_toy)
