@@ -95,8 +95,10 @@ export default class Environment {
     this.scene.environmentIntensity = defaultEnvIntensity
 
     // Debug
-    this.debugFolder.add(this.scene, 'environmentIntensity')
-                    .name("Environment Intensity")
-                    .min(0).max(10).step(0.001)
+    if (this.debug.active) {
+      this.debugFolder.add(this.scene, 'environmentIntensity')
+                      .name("Environment Intensity")
+                      .min(0).max(10).step(0.001)
+    }
   }
 }

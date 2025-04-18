@@ -30,7 +30,6 @@ export default class Window {
 
   setModel() {
     this.model = this.resource.scene
-    console.log(this.model)
     this.model.scale.setScalar(defaultScale)
     this.model.position.set(defaultPosX, defaultPosY, defaultPosZ)
     this.model.castShadow = true
