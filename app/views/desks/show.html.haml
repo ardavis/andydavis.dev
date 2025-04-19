@@ -1,33 +1,25 @@
 %canvas#desk_canvas
 -# TODO: Lazy Load iframes
--# %iframe#screen_overlay(src="http://localhost:3001" frameborder="0")
-#screen_overlay.carousel.slide
-  .carousel-indicators
-    %button.active{"aria-current" => "true", "aria-label" => "Slide 1", "data-bs-slide-to" => "0", "data-bs-target" => "#screen_overlay", :type => "button"}
-    %button{"aria-label" => "Slide 2", "data-bs-slide-to" => "1", "data-bs-target" => "#screen_overlay", :type => "button"}
-    %button{"aria-label" => "Slide 3", "data-bs-slide-to" => "2", "data-bs-target" => "#screen_overlay", :type => "button"}
-  .carousel-inner
-    .carousel-item.active
-      %iframe(src="http://localhost:3001" frameborder="0")
-      .carousel-caption.d-none.d-md-block
-        %h5 First slide label
-        %p Some representative placeholder content for the first slide.
-    .carousel-item
-      %iframe(src="http://localhost:3002" frameborder="0")
-      .carousel-caption.d-none.d-md-block
-        %h5 Second slide label
-        %p Some representative placeholder content for the second slide.
-    .carousel-item
-      %iframe(src="http://localhost:3003" frameborder="0")
-      .carousel-caption.d-none.d-md-block
-        %h5 Third slide label
-        %p Some representative placeholder content for the third slide.
-  %button.carousel-control-prev{"data-bs-slide" => "prev", "data-bs-target" => "#screen_overlay", :type => "button"}
-    %span.carousel-control-prev-icon{"aria-hidden" => "true"}
-    %span.visually-hidden Previous
-  %button.carousel-control-next{"data-bs-slide" => "next", "data-bs-target" => "#screen_overlay", :type => "button"}
-    %span.carousel-control-next-icon{"aria-hidden" => "true"}
-    %span.visually-hidden Next
+#screen_overlay.cli-container
+  .cli-header
+    %span Terminal - Andy's Portfolio
+    %button.btn.btn-sm.btn-danger{:onclick => "document.getElementById('monitor').classList.add('d-none')"} ✕
+  .cli-body
+    #cli-output
+      %p $ dir
+      .project-list
+        - @projects.each_with_index do |project, index|
+          .project-item{"data-project" => "#{project[:name]}"}
+            %img.thumbnail{:alt => "#{project[:name]} thumbnail", :src => "#{asset_path(project[:thumbnail])}"}/
+            %span= project[:name]
+            %p= project[:description]
+    #cli-input
+      %span $
+      %input#cli-command{:placeholder => "Type 'launch <project>' or click a project", :type => "text"}/
+    #website-display.d-none
+      #terminal-output
+      %iframe#website-iframe.w-100{:height => "600px", :style => "border: none;"}
+
 
 
 = javascript_tag "import 'desk'", type: :module

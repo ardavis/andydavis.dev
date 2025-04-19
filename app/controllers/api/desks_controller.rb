@@ -34,11 +34,19 @@ class Api::DesksController < ApplicationController
       { name: "SmallEmptyRoom1", path: "environments/small_empty_room_1_1k.hdr" }
     ]
 
+    # TODO: user.projects
+    projects = [
+      { name: "andyuna", url: "https://andyuna.andydavis.dev", description: "TODO", thumbnail: "andyuna_thumbnail.jpg" },
+      { name: "gamestockpile", url: "https://gamestockpile.andydavis.dev", description: "TODO", thumbnail: "gamestockpile_thumbnail.jpg" },
+      { name: "ayrship", url: "https://ayrship.andydavis.dev", description: "TODO", thumbnail: "ayrship_thumbnail.jpg" }
+    ]
+
     render json: {
       object_count: texturePacks.sum { |pack| pack[:paths].size } + models.size + environments.size,
       texturePacks: texturePacks,
       models: models,
-      environments: environments
+      environments: environments,
+      projects: projects
     }
   end
 end

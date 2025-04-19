@@ -48,6 +48,7 @@ export default class Resources extends EventEmitter {
     this.loadTexturePacks(data.texturePacks)
     this.loadModels(data.models)
     this.loadEnvironments(data.environments)
+    this.projects = data.projects
 
     if (data.fonts)
       this.loadFonts(data.fonts)
