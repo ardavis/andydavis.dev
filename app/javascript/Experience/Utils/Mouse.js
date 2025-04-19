@@ -31,9 +31,9 @@ export default class Mouse {
         if (event.deltaY < 0) {
           this.experience.camera.moveToMonitor()
         }
-        else if (event.deltaY > 0) {
-          this.experience.camera.moveToStartingPosition()
-        }
+        // else if (event.deltaY > 0) {
+        //   this.experience.camera.moveToStartingPosition()
+        // }
       }
     })
   }

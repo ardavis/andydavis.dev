@@ -2,23 +2,23 @@
 #screen_overlay.cli-container{ data: { controller: 'cli' } }
   .cli-header
     %span Terminal - Andy's Portfolio
-    %button.btn.btn-sm.btn-danger{:onclick => "document.getElementById('monitor').classList.add('d-none')"} ✕
+    %button.btn.btn-sm.btn-danger{ data: { action: "click->cli#hideScreen" } } ✕
   .cli-body
-    #cli-output
+    #cli-output{ data: { "cli-target": "output" } }
       %p $ dir
-      .project-list
+      .project-list.project-list--two-per-row
         - @projects.each do |project|
-          .project{ "data-project": "#{project[:name]}" }
-            = image_tag %project(:thumbnail="")
-            %img.thumbnail{:alt => "#{project[:name]} thumbnail", :src => "#{asset_path(project[:thumbnail])}"}/
-            %span= project[:name]
-            %p= project[:description]
+          .project-item{ data: { cli_target: "project", action: "click->cli#launch", project_name: project.name, project_url: project.url, project_description: project.description } }
+            %span= project.name
+            = image_tag "thumbnails/#{project.thumbnail}", class: "thumbnail"
+            %p= project.description
     #cli-input
       %span $
-      %input#cli-command{:placeholder => "Type 'launch <project>' or click a project", :type => "text"}/
+      = text_field_tag :cli_command, nil, { id: "cli-command", placeholder: "Type 'launch <project>' or click a project", data: { action: "keyup->cli#execute" } }
     #website-display.d-none
-      #terminal-output
-      %iframe#website-iframe.w-100{:height => "600px", :style => "border: none;"}
+      #terminal-output{ data: { "cli-target": "websiteDisplay" } }
+      %div{ data: { "cli-target": "terminalOutput" } }
+      %iframe.w-100{ data: { "cli-target": "iframe" }, height: "600px", style: "border: none;" }
 
 
 

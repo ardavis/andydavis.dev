@@ -12,19 +12,17 @@
   position: absolute;
   top: 100px;
   left: 100px;
-  background-color: white;
-  display: none;
   width: 80vw;
   height: 80vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 10;
+  overflow-y: auto;
+  display: none;
 
-  .carousel-inner, .carousel-item {
-    height: 100%;
-  }
-
-  iframe {
-    width: 100%;
-    height: 100%;
-  }
+  // iframe {
+  //   width: 100%;
+  //   height: 100%;
+  // }
 }
 
 .instructions {
@@ -35,4 +33,88 @@
 .current_time {
   color: white;
   font: 1rem "Verdana"
+}
+
+.cli-container {
+  max-width: 700px;
+  margin: 10px auto;
+  background: #1a1a1a;
+  border-radius: 5px;
+  font-family: monospace;
+  color: #00ff00;
+}
+.cli-header {
+  background: #333;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.cli-body {
+  padding: 8px;
+}
+.project-list {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.project-list--two-per-row .project-item {
+  flex: 1 1 calc(50% - 10px); /* 2 items per row, accounting for gap */
+  min-width: 250px; /* Ensure items don't shrink too much */
+}
+.project-list--three-per-row .project-item {
+  flex: 1 1 calc(33.333% - 10px); /* 3 items per row, accounting for gap */
+  min-width: 200px;
+}
+.project-item {
+  cursor: pointer;
+  padding: 8px;
+  background: #333;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px; /* Space between name, thumbnail, and description */
+}
+.project-item:hover {
+  background: #555;
+}
+.thumbnail {
+  width: 50px;
+  height: 30px;
+  object-fit: cover;
+}
+.project-item span {
+  font-size: 14px;
+}
+.project-item p {
+  font-size: 12px;
+  margin: 0;
+  color: #cccccc;
+}
+#cli-input {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+#cli-input input {
+  background: #1a1a1a;
+  border: none;
+  color: #00ff00;
+  font-family: monospace;
+  flex: 1;
+}
+#website-display {
+  margin-top: 8px;
+}
+#cli-input input::after {
+  content: "|";
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
 }
