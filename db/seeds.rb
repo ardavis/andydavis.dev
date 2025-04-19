@@ -4,9 +4,22 @@
 
 # Users
 user = if Rails.env.development?
-         User.find_or_create_by(name: "Andy Davis", email: "andy@andydavis.dev", password: "password", password_confirmation: "password")
-       else
-         User.find_or_create_by(name: "Andy Davis", email: "andy@andydavis.dev")
+         User.find_or_create_by!(name: "Andy Davis", email: "andy@andydavis.dev") do |user|
+           user.password = "password"
+           user.password_confirmation = "password"
+           user.confirmed_at = Time.now
+         end
        end
+
+# Projects
+project_data = [
+  { name: "andyuna", url: "https://andyuna.andydavis.dev", description: "TODO", thumbnail: "andyuna.png" },
+  { name: "gamestockpile", url: "https://gamestockpile.andydavis.dev", description: "TODO", thumbnail: "gamestockpile.png" },
+  { name: "ayrship", url: "https://ayrship.andydavis.dev", description: "TODO", thumbnail: "ayrship.png" }
+]
+project_data.each do |project|
+  user.projects.find_or_create_by!(name: project[:name], url: project[:url], description: project[:description],
+                                   thumbnail: project[:thumbnail])
+end
 
 # Academic Experiences

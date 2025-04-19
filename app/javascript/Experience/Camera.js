@@ -36,6 +36,9 @@ export default class Camera {
 
     this.setInstance()
     this.setOrbitControls()
+
+    // REMOVE! TEMP!
+    this.moveToMonitor()
   }
 
   setInstance() {
